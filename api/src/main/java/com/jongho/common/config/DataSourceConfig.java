@@ -19,8 +19,8 @@ import javax.sql.DataSource;
 @Configuration
 @PropertySource("classpath:application-api-${spring.profiles.active:default}.properties")
 public class DataSourceConfig {
-    @Bean(name = "sourceDataSource")
-    @ConfigurationProperties(prefix = "spring.datasource.hikari.source")
+    @Bean
+    @ConfigurationProperties(prefix = "spring.datasource.hikari")
     public DataSource sourceDataSource() {
 
         return DataSourceBuilder
@@ -30,7 +30,7 @@ public class DataSourceConfig {
     }
 
     @Bean
-    public DataSourceInitializer dataSourceInitializer(@Qualifier("sourceDataSource") DataSource dataSource) {
+    public DataSourceInitializer dataSourceInitializer(DataSource dataSource) {
         DataSourceInitializer initializer = new DataSourceInitializer();
         initializer.setDatabasePopulator(databasePopulator());
         initializer.setDataSource(dataSource);

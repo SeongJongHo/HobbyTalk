@@ -1,0 +1,66 @@
+version: '3.8'
+
+networks:
+  app_network:
+    driver: bridge
+    name: hobby_talk_java_app_network
+
+services:
+  mysql:
+    image: mysql:8.0
+    container_name: mysql_container
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+    ports:
+      - "${MYSQL_PORT}:${MYSQL_PORT}"
+    healthcheck:
+      test: [ "CMD", "mysqladmin", "ping", "-h", "localhost", "-p${MYSQL_PASSWORD}" ]
+      interval: 3s
+      timeout: 2s
+      retries: 10
+      start_period: 10s
+    networks:
+      - app_network
+
+  redis:
+    image: redis:7.0
+    container_name: redis_container
+    restart: always
+    ports:
+      - "${REDIS_PORT}:${REDIS_PORT}"
+    networks:
+      - app_network
+
+  api_test:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: tester
+    container_name: api_test_container
+    depends_on:
+      redis:
+        condition: service_started
+      mysql:
+        condition: service_healthy
+    networks:
+      - app_network
+
+  api_run:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: runner
+    container_name: api_container
+    environment:
+      - SPRING_PROFILES_ACTIVE=${SPRING_PROFILES_ACTIVE}
+    ports:
+      - "${API_PORT}:${API_PORT}"
+    depends_on:
+      redis:
+        condition: service_started
+      mysql:
+        condition: service_healthy
+    networks:
+      - app_network

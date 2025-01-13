@@ -28,7 +28,6 @@ public class MyBatisConfig {
 
     @Bean
     public SqlSessionFactory sqlSessionFactory(
-            @Qualifier("sourceDataSource")
             DataSource dataSource) throws Exception {
 
         SqlSessionFactoryBean sqlSessionFactoryBean = new SqlSessionFactoryBean();
@@ -42,7 +41,6 @@ public class MyBatisConfig {
 
     @Bean
     public PlatformTransactionManager transactionManager(
-            @Qualifier("sourceDataSource")
             DataSource dataSource) {
         return new DataSourceTransactionManager(dataSource);
     }

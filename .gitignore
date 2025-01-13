@@ -50,6 +50,8 @@ api-gateway/src/main/resources/application-gateway-production.properties
 api/src/main/resources/application-api-local.properties
 api/src/main/resources/application-api-test.properties
 api/src/main/resources/application-api-production.properties
+api/src/.env
+.env
 
 ### Open Chat API Properties ###
 open-chat-api/src/main/resources/application-open-chat-api-local.properties
