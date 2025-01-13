@@ -1,22 +1,23 @@
 package com.jongho.common.dao;
 
-import org.mybatis.spring.annotation.MapperScan;
 import org.mybatis.spring.boot.test.autoconfigure.MybatisTest;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.context.ActiveProfiles;
+import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.TestPropertySource;
 
 import javax.sql.DataSource;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
+import java.io.InputStream;
+import java.nio.charset.StandardCharsets;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
-@ActiveProfiles("test")
 @MybatisTest(properties = "spring.profiles.active=test")
-@MapperScan(basePackages = "com.jongho.**.dao.mapper")
+@TestPropertySource(properties = {"spring.profiles.active=test"})
+@AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 @ContextConfiguration(classes = RepositoryTestConfiguration.class)
 public class BaseMapperTest {
     @Autowired
@@ -45,7 +46,7 @@ public class BaseMapperTest {
     }
 
     private void initializeAutoIncrement(String tableName){
-        String sql = "ALTER TABLE " + tableName + " ALTER COLUMN id RESTART WITH 1;";
+        String sql = "ALTER TABLE " + tableName + " AUTO_INCREMENT = 1;";
         try(Connection connection = dataSource.getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement(sql)){
             preparedStatement.execute();
@@ -86,14 +87,14 @@ public class BaseMapperTest {
         initializeAutoIncrement("open_chat_room_membership_requests");
     }
 
-    protected void setUpCategoryTable(){
-        try {
-            String sql = new String(Files.readAllBytes(Paths.get("src/test/resources/setupDummyData/categoryDummyData.sql")));
+    protected void setUpCategoryTable() {
+        ClassPathResource resource = new ClassPathResource("setUpDummyData/categoryDummyData.sql");
+
+        try (InputStream inputStream = resource.getInputStream()) {
+            String sql = new String(inputStream.readAllBytes(), StandardCharsets.UTF_8);
             setUpTable(sql);
         } catch (IOException e) {
             e.printStackTrace();
-            return;
         }
-
     }
 }

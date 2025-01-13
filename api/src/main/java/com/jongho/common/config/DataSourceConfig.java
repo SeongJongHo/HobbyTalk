@@ -17,7 +17,7 @@ import javax.sql.DataSource;
 * sourceDataSource라는 Bean 이름을 가진 DataSource를 생성하는 설정 클래스
 */
 @Configuration
-@PropertySource("classpath:application-api-${spring.profiles.active:default}.properties")
+@PropertySource("classpath:application-api-${spring.profiles.active:local}.properties")
 public class DataSourceConfig {
     @Bean
     @ConfigurationProperties(prefix = "spring.datasource.hikari")
