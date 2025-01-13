@@ -1,4 +1,4 @@
-package com.jongho.OpenChatRoomMembershipRequest.domain.model;
+package com.jongho.openChatRoomMembershipRequest.domain.model;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;

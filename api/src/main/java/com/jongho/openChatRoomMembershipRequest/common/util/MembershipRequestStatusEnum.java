@@ -1,4 +1,4 @@
-package com.jongho.OpenChatRoomMembershipRequest.common.util;
+package com.jongho.openChatRoomMembershipRequest.common.util;
 
 public enum MembershipRequestStatusEnum {
     PARTICIPATION_REQUEST(1),

@@ -22,12 +22,11 @@ public class DataSourceConfig {
     @Bean(name = "sourceDataSource")
     @ConfigurationProperties(prefix = "spring.datasource.hikari.source")
     public DataSource sourceDataSource() {
-        DataSource dataSource = DataSourceBuilder
+
+        return DataSourceBuilder
                 .create()
                 .type(HikariDataSource.class)
                 .build();
-
-        return dataSource;
     }
 
     @Bean

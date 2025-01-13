@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "//mybatis.org/DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.jongho.OpenChatRoomMembershipRequest.dao.mapper.OpenChatRoomMembershipRequestMapper">
+<mapper namespace="com.jongho.openChatRoomMembershipRequest.dao.mapper.OpenChatRoomMembershipRequestMapper">
     <select id="countByRequesterIdAndStatus" resultType="int">
         SELECT
             COUNT(*)
@@ -21,7 +21,7 @@
                 AND deleted_time IS NULL
             )
     </select>
-    <insert id="createOpenChatRoomMembershipRequest" parameterType="com.jongho.OpenChatRoomMembershipRequest.domain.model.OpenChatRoomMembershipRequest" useGeneratedKeys="true" keyProperty="id">
+    <insert id="createOpenChatRoomMembershipRequest" parameterType="com.jongho.openChatRoomMembershipRequest.domain.model.OpenChatRoomMembershipRequest" useGeneratedKeys="true" keyProperty="id">
         INSERT INTO open_chat_room_membership_requests (
             requester_id,
             open_chat_room_id,
