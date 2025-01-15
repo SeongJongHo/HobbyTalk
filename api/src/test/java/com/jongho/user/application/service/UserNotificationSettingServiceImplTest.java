@@ -1,7 +1,7 @@
 package com.jongho.user.application.service;
 
 import com.jongho.user.domain.model.UserNotificationSetting;
-import com.jongho.user.domain.repository.UserNotificationSettingRepository;
+import com.jongho.user.application.repository.UserNotificationSettingRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;

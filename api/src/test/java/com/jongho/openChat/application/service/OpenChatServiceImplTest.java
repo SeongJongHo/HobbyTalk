@@ -1,7 +1,7 @@
 package com.jongho.openChat.application.service;
 
 import com.jongho.openChat.domain.model.OpenChat;
-import com.jongho.openChat.domain.repository.OpenChatRepository;
+import com.jongho.openChat.application.repository.OpenChatRepository;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;

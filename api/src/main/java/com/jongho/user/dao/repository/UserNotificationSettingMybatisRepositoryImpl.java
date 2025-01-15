@@ -2,7 +2,7 @@ package com.jongho.user.dao.repository;
 
 import com.jongho.user.dao.mapper.UserNotificationSettingMapper;
 import com.jongho.user.domain.model.UserNotificationSetting;
-import com.jongho.user.domain.repository.UserNotificationSettingRepository;
+import com.jongho.user.application.repository.UserNotificationSettingRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 

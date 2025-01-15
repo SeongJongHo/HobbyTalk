@@ -2,7 +2,7 @@ package com.jongho.openChat.application.service;
 
 import com.jongho.openChat.application.dto.OpenChatDto;
 import com.jongho.openChat.domain.model.OpenChat;
-import com.jongho.openChat.domain.repository.OpenChatRepository;
+import com.jongho.openChat.application.repository.OpenChatRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

@@ -1,4 +1,4 @@
-package com.jongho.openChat.domain.repository;
+package com.jongho.openChat.application.repository;
 
 import com.jongho.openChat.application.dto.OpenChatDto;
 import com.jongho.openChat.domain.model.OpenChat;

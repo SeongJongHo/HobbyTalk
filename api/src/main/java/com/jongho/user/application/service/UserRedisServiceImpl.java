@@ -1,7 +1,7 @@
 package com.jongho.user.application.service;
 
 import com.jongho.user.domain.model.redis.CachedUserProfile;
-import com.jongho.user.domain.repository.UserRedisRepository;
+import com.jongho.user.application.repository.UserRedisRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

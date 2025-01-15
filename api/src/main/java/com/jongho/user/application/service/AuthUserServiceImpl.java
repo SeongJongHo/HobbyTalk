@@ -1,7 +1,7 @@
 package com.jongho.user.application.service;
 
 import com.jongho.user.domain.model.AuthUser;
-import com.jongho.user.domain.repository.AuthUserRepository;
+import com.jongho.user.application.repository.AuthUserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

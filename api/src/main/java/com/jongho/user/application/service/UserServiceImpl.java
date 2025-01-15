@@ -5,7 +5,7 @@ import com.jongho.common.exception.UserNotFoundException;
 import com.jongho.common.util.bcrypt.BcryptUtil;
 import com.jongho.user.application.dto.request.UserSignUpDto;
 import com.jongho.user.domain.model.User;
-import com.jongho.user.domain.repository.UserRepository;
+import com.jongho.user.application.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;

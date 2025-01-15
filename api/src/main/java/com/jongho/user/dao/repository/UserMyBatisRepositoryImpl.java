@@ -2,7 +2,7 @@ package com.jongho.user.dao.repository;
 
 import com.jongho.user.dao.mapper.UserMapper;
 import com.jongho.user.domain.model.User;
-import com.jongho.user.domain.repository.UserRepository;
+import com.jongho.user.application.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 

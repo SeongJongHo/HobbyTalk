@@ -4,7 +4,7 @@ import com.jongho.common.exception.OpenChatRoomNotFoundException;
 import com.jongho.common.exception.UnAuthorizedException;
 import com.jongho.openChatRoom.domain.model.OpenChatRoom;
 import com.jongho.openChatRoom.domain.model.redis.CachedOpenChatRoom;
-import com.jongho.openChatRoom.domain.repository.OpenChatRoomRepository;
+import com.jongho.openChatRoom.application.repository.OpenChatRoomRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

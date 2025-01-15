@@ -3,7 +3,7 @@ package com.jongho.user.dao.repository;
 import com.jongho.common.util.redis.BaseRedisTemplate;
 import com.jongho.common.util.redis.RedisKeyGeneration;
 import com.jongho.user.domain.model.redis.CachedUserProfile;
-import com.jongho.user.domain.repository.UserRedisRepository;
+import com.jongho.user.application.repository.UserRedisRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 

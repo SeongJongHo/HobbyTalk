@@ -4,7 +4,7 @@ import com.jongho.common.exception.UserDuplicatedException;
 import com.jongho.common.exception.UserNotFoundException;
 import com.jongho.user.application.dto.request.UserSignUpDto;
 import com.jongho.user.domain.model.User;
-import com.jongho.user.domain.repository.UserRepository;
+import com.jongho.user.application.repository.UserRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;

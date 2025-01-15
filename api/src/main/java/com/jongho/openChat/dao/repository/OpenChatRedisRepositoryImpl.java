@@ -3,7 +3,7 @@ package com.jongho.openChat.dao.repository;
 import com.jongho.common.util.redis.BaseRedisTemplate;
 import com.jongho.common.util.redis.RedisKeyGeneration;
 import com.jongho.openChat.domain.model.OpenChat;
-import com.jongho.openChat.domain.repository.OpenChatRedisRepository;
+import com.jongho.openChat.application.repository.OpenChatRedisRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 

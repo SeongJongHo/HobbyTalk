@@ -1,4 +1,4 @@
-package com.jongho.user.domain.repository;
+package com.jongho.user.application.repository;
 
 import com.jongho.user.domain.model.AuthUser;
 

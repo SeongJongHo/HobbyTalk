@@ -3,7 +3,7 @@ package com.jongho.openChat.dao.repository;
 import com.jongho.openChat.application.dto.OpenChatDto;
 import com.jongho.openChat.dao.mapper.OpenChatMapper;
 import com.jongho.openChat.domain.model.OpenChat;
-import com.jongho.openChat.domain.repository.OpenChatRepository;
+import com.jongho.openChat.application.repository.OpenChatRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 

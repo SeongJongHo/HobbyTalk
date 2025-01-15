@@ -1,4 +1,4 @@
-package com.jongho.openChatRoomUser.domain.repository;
+package com.jongho.openChatRoomUser.application.repository;
 
 import com.jongho.openChatRoomUser.domain.model.OpenChatRoomUser;
 

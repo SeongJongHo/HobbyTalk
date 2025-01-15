@@ -1,7 +1,7 @@
 package com.jongho.openChatRoomUser.application.service;
 
 import com.jongho.openChatRoomUser.domain.model.OpenChatRoomUser;
-import com.jongho.openChatRoomUser.domain.repository.OpenChatRoomUserRepository;
+import com.jongho.openChatRoomUser.application.repository.OpenChatRoomUserRepository;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;

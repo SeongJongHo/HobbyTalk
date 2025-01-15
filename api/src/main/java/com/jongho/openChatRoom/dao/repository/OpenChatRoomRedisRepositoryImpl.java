@@ -5,7 +5,7 @@ import com.jongho.common.util.redis.RedisKeyGeneration;
 import com.jongho.openChat.domain.model.OpenChat;
 import com.jongho.openChatRoom.domain.model.redis.CachedOpenChatRoom;
 import com.jongho.openChatRoom.domain.model.redis.CachedOpenChatRoomConnectionInfo;
-import com.jongho.openChatRoom.domain.repository.OpenChatRoomRedisRepository;
+import com.jongho.openChatRoom.application.repository.OpenChatRoomRedisRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
