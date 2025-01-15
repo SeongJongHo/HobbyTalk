@@ -1,4 +1,4 @@
-package com.jongho.category.domain.repository;
+package com.jongho.category.application.repository;
 
 import com.jongho.category.domain.model.Category;
 

@@ -1,6 +1,7 @@
 package com.jongho.category.dao.mapper;
 
 import com.jongho.category.domain.model.Category;
+import com.jongho.category.infra.dao.mapper.CategoryMapper;
 import com.jongho.common.dao.BaseMapperTest;
 import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;

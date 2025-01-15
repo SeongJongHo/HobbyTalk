@@ -1,4 +1,4 @@
-package com.jongho.category.controller;
+package com.jongho.category.presentation.controller;
 
 import com.jongho.category.application.service.CategoryService;
 

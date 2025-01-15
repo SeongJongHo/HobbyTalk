@@ -1,12 +1,10 @@
 package com.jongho.category.presentation;
 
-import com.google.gson.Gson;
 import com.jongho.category.application.service.CategoryService;
-import com.jongho.category.controller.CategoryController;
+import com.jongho.category.presentation.controller.CategoryController;
 import com.jongho.category.domain.model.Category;
 import com.jongho.common.config.WebMvcConfig;
 import com.jongho.common.interceptor.AuthInterceptor;
-import com.jongho.user.presentation.controller.UserController;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;

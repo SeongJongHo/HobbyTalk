@@ -1,8 +1,8 @@
-package com.jongho.category.dao.repository;
+package com.jongho.category.infra.dao.repository;
 
-import com.jongho.category.dao.mapper.CategoryMapper;
+import com.jongho.category.infra.dao.mapper.CategoryMapper;
 import com.jongho.category.domain.model.Category;
-import com.jongho.category.domain.repository.CategoryRepository;
+import com.jongho.category.application.repository.CategoryRepository;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;

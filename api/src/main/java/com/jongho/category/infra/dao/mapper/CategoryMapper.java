@@ -1,4 +1,4 @@
-package com.jongho.category.dao.mapper;
+package com.jongho.category.infra.dao.mapper;
 
 import com.jongho.category.domain.model.Category;
 import org.apache.ibatis.annotations.Mapper;

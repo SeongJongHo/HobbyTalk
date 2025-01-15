@@ -1,7 +1,7 @@
 package com.jongho.category.application.service;
 
 import com.jongho.category.domain.model.Category;
-import com.jongho.category.domain.repository.CategoryRepository;
+import com.jongho.category.application.repository.CategoryRepository;
 import com.jongho.common.exception.CategoryNotFoundException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
