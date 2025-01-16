@@ -7,6 +7,8 @@ import com.jongho.common.util.websocket.BaseWebSocketMessage;
 import com.jongho.openChat.application.dto.OpenChatDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.redis.connection.MessageListener;
+import org.springframework.data.redis.core.Cursor;
+import org.springframework.data.redis.core.ScanOptions;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Component;
 import org.springframework.web.socket.TextMessage;
@@ -61,6 +63,16 @@ public class BaseRedisTemplate {
         return result;
     }
 
+    public <T> List<T> popListData(String key, Class<T> valueType, int limit) {
+        List<String> jsonValue = stringRedisTemplate.opsForList().leftPop(key, limit);
+        if(jsonValue == null){
+            return null;
+        }
+
+        return mappingToElement(jsonValue, valueType);
+    }
+
+
     public <T> void setAllListData(String key, List<T> value) {
         stringRedisTemplate.opsForList().rightPushAll(key, value.stream().map(this::toJson).collect(Collectors.toList()));
     }
@@ -88,9 +100,13 @@ public class BaseRedisTemplate {
         stringRedisTemplate.opsForHash().increment(key, column, value);
     }
 
+    public Cursor<String> scan(ScanOptions options) {
+        return stringRedisTemplate.scan(options);
+    }
+
     public <T> T getHashData(String key, Class<T> valueType) {
         Map<Object, Object> map = stringRedisTemplate.opsForHash().entries(key);
-        if(map.size() == 0){
+        if(map.isEmpty()){
             return null;
         }
         return mapToObject(map, valueType);

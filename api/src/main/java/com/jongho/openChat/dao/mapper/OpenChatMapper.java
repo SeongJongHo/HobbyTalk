@@ -18,4 +18,5 @@ public interface OpenChatMapper {
             @Param("openChatRoomId") Long openChatRoomId,
             @Param("lastCreatedTime") String lastCreatedTime,
             @Param("limit") int limit);
+    void insertBatch(List<OpenChat> openChats);
 }

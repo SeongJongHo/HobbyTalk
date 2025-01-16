@@ -59,8 +59,3 @@ project(':api') { // 컴파일 시 api 로딩
 	dependencies {
 	}
 }
-
-project(':batch') { // 컴파일 시 batch 로딩
-	dependencies {
-	}
-}

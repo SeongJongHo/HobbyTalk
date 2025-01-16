@@ -6,7 +6,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 
 @Configuration
-@PropertySource("classpath:application-api-${spring.profiles.active:default}.properties")
+@PropertySource("classpath:application-api-${spring.profiles.active:local}.properties")
 public class JwtConfig {
     @Value("${jwt.secret}")
     private String secretKey;

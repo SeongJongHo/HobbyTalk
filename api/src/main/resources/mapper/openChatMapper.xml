@@ -45,4 +45,26 @@
         ORDER BY open_chats.created_time DESC
         LIMIT #{limit}
     </select>
+    <insert id="insertBatch" parameterType="list">
+        INSERT INTO open_chats (
+        open_chat_room_id,
+        sender_id,
+        message,
+        type,
+        is_deleted,
+        deleted_time,
+        created_time
+        ) VALUES
+        <foreach collection="list" item="com.jongho.openChat.domain.model.OpenChat" separator=",">
+            (
+            #{chat.openChatRoomId},
+            #{chat.senderId},
+            #{chat.message},
+            #{chat.type},
+            #{chat.isDeleted},
+            #{chat.deletedTime},
+            #{chat.createdTime}
+            )
+        </foreach>
+    </insert>
 </mapper>
