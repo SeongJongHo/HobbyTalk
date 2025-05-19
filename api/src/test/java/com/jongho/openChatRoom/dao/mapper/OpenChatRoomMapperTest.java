@@ -1,8 +1,9 @@
 package com.jongho.openChatRoom.dao.mapper;
 
 import com.jongho.common.dao.BaseMapperTest;
-import com.jongho.openChatRoom.domain.model.OpenChatRoom;
-import com.jongho.openChatRoom.domain.model.redis.CachedOpenChatRoom;
+import com.jongho.openChat.dao.mapper.OpenChatRoomMapper;
+import com.jongho.openChat.domain.model.OpenChatRoom;
+import com.jongho.openChat.domain.model.redis.CachedOpenChatRoom;
 import com.jongho.openChatRoomUser.dao.mapper.OpenChatRoomUserMapper;
 import com.jongho.openChatRoomUser.domain.model.OpenChatRoomUser;
 import org.junit.jupiter.api.*;

@@ -1,10 +1,11 @@
 package com.jongho.openChatRoom.application.service;
 
 import com.jongho.common.util.date.DateUtil;
+import com.jongho.openChat.application.service.OpenChatRoomRedisServiceImpl;
 import com.jongho.openChat.domain.model.OpenChat;
-import com.jongho.openChatRoom.domain.model.redis.CachedOpenChatRoom;
-import com.jongho.openChatRoom.domain.model.redis.CachedOpenChatRoomConnectionInfo;
-import com.jongho.openChatRoom.application.repository.OpenChatRoomRedisRepository;
+import com.jongho.openChat.domain.model.redis.CachedOpenChatRoom;
+import com.jongho.openChat.domain.model.redis.CachedOpenChatRoomConnectionInfo;
+import com.jongho.openChat.application.repository.OpenChatRoomRedisRepository;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;

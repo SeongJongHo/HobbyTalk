@@ -1,20 +1,20 @@
 package com.jongho.openChat.application.facade;
 
 import com.jongho.common.exception.OpenChatRoomNotFoundException;
-import com.jongho.openChat.application.dto.OpenChatDto;
+import com.jongho.openChat.application.dto.response.OpenChatDto;
 import com.jongho.openChat.application.service.OpenChatRedisService;
 import com.jongho.openChat.domain.model.OpenChat;
-import com.jongho.openChatRoom.application.service.OpenChatRoomRedisService;
-import com.jongho.openChatRoom.application.service.OpenChatRoomService;
-import com.jongho.openChatRoom.domain.model.redis.CachedOpenChatRoom;
-import com.jongho.openChatRoom.domain.model.redis.CachedOpenChatRoomConnectionInfo;
+import com.jongho.openChat.application.service.OpenChatRoomRedisService;
+import com.jongho.openChat.application.service.OpenChatRoomService;
+import com.jongho.openChat.domain.model.redis.CachedOpenChatRoom;
+import com.jongho.openChat.domain.model.redis.CachedOpenChatRoomConnectionInfo;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-import static com.jongho.openChatRoom.common.enums.ActiveTypeEnum.INACTIVE;
+import static com.jongho.openChat.common.enums.ActiveTypeEnum.INACTIVE;
 
 @Service
 @Log4j2

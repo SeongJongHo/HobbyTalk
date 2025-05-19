@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "//mybatis.org/DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.jongho.openChatRoom.dao.mapper.OpenChatRoomMapper">
+<mapper namespace="com.jongho.openChat.dao.mapper.OpenChatRoomMapper">
     <select id="countByManagerId" parameterType="Long" resultType="int">
         SELECT
             COUNT(*) AS count
@@ -9,7 +9,7 @@
         AND open_chat_rooms.deleted_time is null
         LIMIT 1
     </select>
-    <insert id="createOpenChatRoom" parameterType="com.jongho.openChatRoom.domain.model.OpenChatRoom" useGeneratedKeys="true" keyProperty="id">
+    <insert id="createOpenChatRoom" parameterType="com.jongho.openChat.domain.model.OpenChatRoom" useGeneratedKeys="true" keyProperty="id">
         INSERT INTO open_chat_rooms (manager_id, title, notice, category_id, maximum_capacity, password)
         VALUES (#{managerId}, #{title}, #{notice}, #{categoryId}, #{maximumCapacity}, #{password})
     </insert>
@@ -19,7 +19,7 @@
         WHERE id = #{id}
         AND deleted_time is null
     </update>
-    <select id="selectOneOpenChatRoomByManagerIdAndTitle" parameterType="com.jongho.openChatRoom.domain.model.OpenChatRoom" resultType="com.jongho.openChatRoom.domain.model.OpenChatRoom">
+    <select id="selectOneOpenChatRoomByManagerIdAndTitle" parameterType="com.jongho.openChat.domain.model.OpenChatRoom" resultType="com.jongho.openChat.domain.model.OpenChatRoom">
         SELECT
             id,
             title,
@@ -35,7 +35,7 @@
         AND deleted_time is null
         LIMIT 1
     </select>
-    <select id="selectOneOpenChatRoomByIdForUpdate" parameterType="Long" resultType="com.jongho.openChatRoom.domain.model.OpenChatRoom">
+    <select id="selectOneOpenChatRoomByIdForUpdate" parameterType="Long" resultType="com.jongho.openChat.domain.model.OpenChatRoom">
         SELECT
             id,
             title,
@@ -51,7 +51,7 @@
         LIMIT 1
         FOR UPDATE
     </select>
-    <select id="selectOneOpenChatRoomById" parameterType="Long" resultType="com.jongho.openChatRoom.domain.model.OpenChatRoom">
+    <select id="selectOneOpenChatRoomById" parameterType="Long" resultType="com.jongho.openChat.domain.model.OpenChatRoom">
         SELECT
         id,
         title,
@@ -73,7 +73,7 @@
         WHERE id = #{id}
         AND deleted_time is null
     </update>
-    <select id="selectJoinOpenChatRoomByUserId" parameterType="Long" resultType="com.jongho.openChatRoom.domain.model.redis.CachedOpenChatRoom">
+    <select id="selectJoinOpenChatRoomByUserId" parameterType="Long" resultType="com.jongho.openChat.domain.model.redisnChatRoom">
         SELECT
             open_chat_rooms.id,
             open_chat_rooms.title,
@@ -101,7 +101,7 @@
         WHERE open_chat_rooms.id = #{openChatRoomId}
             AND open_chat_rooms.deleted_time is null
     </select>
-    <select id="selectRedisOpenChatRoomById" parameterType="Long" resultType="com.jongho.openChatRoom.domain.model.redis.CachedOpenChatRoom">
+    <select id="selectRedisOpenChatRoomById" parameterType="Long" resultType="com.jongho.openChat.domain.model.redis.CachedOpenChatRoom">
         SELECT
             id,
             title,

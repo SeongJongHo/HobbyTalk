@@ -1,6 +1,6 @@
 package com.jongho.openChat.application.service;
 
-import com.jongho.openChat.application.dto.OpenChatDto;
+import com.jongho.openChat.application.dto.response.OpenChatDto;
 import com.jongho.openChat.domain.model.OpenChat;
 
 import java.util.List;

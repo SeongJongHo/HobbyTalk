@@ -1,7 +1,7 @@
 package com.jongho.openChat.application.facade;
 
 import com.jongho.common.util.date.DateUtil;
-import com.jongho.openChat.application.dto.OpenChatDto;
+import com.jongho.openChat.application.dto.response.OpenChatDto;
 import com.jongho.openChat.application.service.OpenChatRedisService;
 import com.jongho.openChat.application.service.OpenChatService;
 import com.jongho.openChat.domain.model.OpenChat;

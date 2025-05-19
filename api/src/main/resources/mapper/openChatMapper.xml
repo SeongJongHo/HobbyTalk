@@ -25,7 +25,7 @@
         AND is_deleted = 0
         LIMIT #{limit}
     </select>
-    <select id="selectOpenChatByChatRoomIdAndLastCreatedTime" resultType="com.jongho.openChat.application.dto.OpenChatDto">
+    <select id="selectOpenChatByChatRoomIdAndLastCreatedTime" resultType="com.jongho.openChat.application.dto.response.OpenChatDto">
         SELECT
             open_chats.id,
             open_chats.open_chat_room_id,

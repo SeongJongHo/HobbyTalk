@@ -3,11 +3,11 @@ package com.jongho.openChat.handler;
 import com.jongho.common.database.redis.RedisService;
 import com.jongho.common.util.websocket.BaseMessageTypeEnum;
 import com.jongho.common.util.websocket.BaseWebSocketMessage;
-import com.jongho.openChat.application.dto.OpenChatDto;
+import com.jongho.openChat.application.dto.response.OpenChatDto;
 import com.jongho.openChat.application.dto.request.PaginationDto;
 import com.jongho.openChat.application.facade.ReadWebSocketOpenChatFacade;
 import com.jongho.openChat.application.facade.SendWebSocketOpenChatFacade;
-import com.jongho.openChatRoom.application.service.OpenChatRoomRedisService;
+import com.jongho.openChat.application.service.OpenChatRoomRedisService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.jetbrains.annotations.NotNull;
@@ -19,8 +19,8 @@ import org.springframework.web.socket.handler.TextWebSocketHandler;
 import java.io.IOException;
 import java.util.List;
 
-import static com.jongho.openChatRoom.common.enums.ActiveTypeEnum.ACTIVE;
-import static com.jongho.openChatRoom.common.enums.ActiveTypeEnum.INACTIVE;
+import static com.jongho.openChat.common.enums.ActiveTypeEnum.ACTIVE;
+import static com.jongho.openChat.common.enums.ActiveTypeEnum.INACTIVE;
 
 @Component
 @Log4j2

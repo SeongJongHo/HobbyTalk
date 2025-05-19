@@ -3,10 +3,10 @@ package com.jongho.openChatRoom.presentation;
 import com.google.gson.Gson;
 import com.jongho.common.config.WebMvcConfig;
 import com.jongho.common.interceptor.AuthInterceptor;
-import com.jongho.openChatRoom.application.dto.request.OpenChatRoomCreateDto;
-import com.jongho.openChatRoom.application.facade.OpenChatRoomFacade;
-import com.jongho.openChatRoom.application.service.OpenChatRoomService;
-import com.jongho.openChatRoom.controller.OpenChatRoomController;
+import com.jongho.openChat.application.dto.request.OpenChatRoomCreateDto;
+import com.jongho.openChat.application.facade.OpenChatRoomFacade;
+import com.jongho.openChat.application.service.OpenChatRoomService;
+import com.jongho.openChat.controller.OpenChatRoomController;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;

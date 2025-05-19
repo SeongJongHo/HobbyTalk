@@ -1,12 +1,13 @@
 package com.jongho.openChatRoom.application.facade;
 
+import com.jongho.openChat.application.facade.OpenChatRoomFacadeImpl;
 import com.jongho.openChatRoomMembershipRequest.application.service.OpenChatRoomMembershipRequestService;
 import com.jongho.category.application.service.CategoryService;
 import com.jongho.category.domain.model.Category;
 import com.jongho.common.exception.*;
-import com.jongho.openChatRoom.application.dto.request.OpenChatRoomCreateDto;
-import com.jongho.openChatRoom.application.service.OpenChatRoomService;
-import com.jongho.openChatRoom.domain.model.OpenChatRoom;
+import com.jongho.openChat.application.dto.request.OpenChatRoomCreateDto;
+import com.jongho.openChat.application.service.OpenChatRoomService;
+import com.jongho.openChat.domain.model.OpenChatRoom;
 import com.jongho.openChatRoomUser.application.service.OpenChatRoomUserService;
 import com.jongho.openChatRoomUser.domain.model.OpenChatRoomUser;
 import org.junit.jupiter.api.BeforeEach;

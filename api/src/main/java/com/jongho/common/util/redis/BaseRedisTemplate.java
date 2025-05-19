@@ -1,10 +1,8 @@
 package com.jongho.common.util.redis;
 
-import com.fasterxml.jackson.databind.JavaType;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.jongho.common.exception.MyJsonProcessingException;
 import com.jongho.common.util.websocket.BaseWebSocketMessage;
-import com.jongho.openChat.application.dto.OpenChatDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.redis.connection.MessageListener;
 import org.springframework.data.redis.core.Cursor;

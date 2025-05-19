@@ -2,8 +2,8 @@ package com.jongho.common.interceptor;
 
 import com.google.gson.Gson;
 import com.jongho.common.response.BaseResponseEntity;
-import com.jongho.openChatRoom.application.service.OpenChatRoomService;
-import com.jongho.openChatRoom.domain.model.OpenChatRoom;
+import com.jongho.openChat.application.service.OpenChatRoomService;
+import com.jongho.openChat.domain.model.OpenChatRoom;
 import com.jongho.openChatRoomUser.application.service.OpenChatRoomUserService;
 import com.jongho.openChatRoomUser.domain.model.OpenChatRoomUser;
 import jakarta.servlet.http.HttpServletResponse;

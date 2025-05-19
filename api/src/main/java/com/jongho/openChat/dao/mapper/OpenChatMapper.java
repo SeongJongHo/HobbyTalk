@@ -1,6 +1,6 @@
 package com.jongho.openChat.dao.mapper;
 
-import com.jongho.openChat.application.dto.OpenChatDto;
+import com.jongho.openChat.application.dto.response.OpenChatDto;
 import com.jongho.openChat.domain.model.OpenChat;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
