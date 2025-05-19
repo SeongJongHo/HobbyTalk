@@ -1,6 +1,6 @@
-package com.jongho.openChatRoomMembershipRequest.application.service;
+package com.jongho.openChat.application.service;
 
-import com.jongho.openChatRoomMembershipRequest.domain.model.OpenChatRoomMembershipRequest;
+import com.jongho.openChat.domain.model.OpenChatRoomMembershipRequest;
 
 public interface OpenChatRoomMembershipRequestService {
     public int countByRequesterIdAndStatus(Long requesterId, int status);

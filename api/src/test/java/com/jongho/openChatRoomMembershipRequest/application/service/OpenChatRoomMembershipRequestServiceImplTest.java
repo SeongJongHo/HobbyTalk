@@ -1,8 +1,9 @@
 package com.jongho.openChatRoomMembershipRequest.application.service;
 
-import com.jongho.openChatRoomMembershipRequest.common.util.MembershipRequestStatusEnum;
-import com.jongho.openChatRoomMembershipRequest.domain.model.OpenChatRoomMembershipRequest;
-import com.jongho.openChatRoomMembershipRequest.application.service.repository.OpenChatRoomMembershipRequestRepository;
+import com.jongho.openChat.application.service.OpenChatRoomMembershipRequestServiceImpl;
+import com.jongho.openChat.common.enums.MembershipRequestStatusEnum;
+import com.jongho.openChat.domain.model.OpenChatRoomMembershipRequest;
+import com.jongho.openChat.application.repository.OpenChatRoomMembershipRequestRepository;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;

@@ -1,8 +1,8 @@
-package com.jongho.openChatRoomMembershipRequest.dao.repository;
+package com.jongho.openChat.dao.repository;
 
-import com.jongho.openChatRoomMembershipRequest.dao.mapper.OpenChatRoomMembershipRequestMapper;
-import com.jongho.openChatRoomMembershipRequest.domain.model.OpenChatRoomMembershipRequest;
-import com.jongho.openChatRoomMembershipRequest.application.service.repository.OpenChatRoomMembershipRequestRepository;
+import com.jongho.openChat.dao.mapper.OpenChatRoomMembershipRequestMapper;
+import com.jongho.openChat.domain.model.OpenChatRoomMembershipRequest;
+import com.jongho.openChat.application.repository.OpenChatRoomMembershipRequestRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 

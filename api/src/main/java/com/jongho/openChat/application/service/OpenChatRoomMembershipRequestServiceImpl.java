@@ -1,7 +1,7 @@
-package com.jongho.openChatRoomMembershipRequest.application.service;
+package com.jongho.openChat.application.service;
 
-import com.jongho.openChatRoomMembershipRequest.domain.model.OpenChatRoomMembershipRequest;
-import com.jongho.openChatRoomMembershipRequest.application.service.repository.OpenChatRoomMembershipRequestRepository;
+import com.jongho.openChat.domain.model.OpenChatRoomMembershipRequest;
+import com.jongho.openChat.application.repository.OpenChatRoomMembershipRequestRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

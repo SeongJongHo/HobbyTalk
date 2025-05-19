@@ -1,8 +1,8 @@
 package com.jongho.openChat.application.facade;
 
-import com.jongho.openChatRoomMembershipRequest.application.service.OpenChatRoomMembershipRequestService;
-import com.jongho.openChatRoomMembershipRequest.common.util.MembershipRequestStatusEnum;
-import com.jongho.openChatRoomMembershipRequest.domain.model.OpenChatRoomMembershipRequest;
+import com.jongho.openChat.application.service.OpenChatRoomMembershipRequestService;
+import com.jongho.openChat.common.enums.MembershipRequestStatusEnum;
+import com.jongho.openChat.domain.model.OpenChatRoomMembershipRequest;
 import com.jongho.category.application.service.CategoryService;
 import com.jongho.category.domain.model.Category;
 import com.jongho.common.exception.*;
