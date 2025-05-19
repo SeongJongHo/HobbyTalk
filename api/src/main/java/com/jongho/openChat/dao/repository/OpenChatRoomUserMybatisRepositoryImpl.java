@@ -1,8 +1,8 @@
-package com.jongho.openChatRoomUser.dao.repository;
+package com.jongho.openChat.dao.repository;
 
-import com.jongho.openChatRoomUser.dao.mapper.OpenChatRoomUserMapper;
-import com.jongho.openChatRoomUser.domain.model.OpenChatRoomUser;
-import com.jongho.openChatRoomUser.application.repository.OpenChatRoomUserRepository;
+import com.jongho.openChat.dao.mapper.OpenChatRoomUserMapper;
+import com.jongho.openChat.domain.model.OpenChatRoomUser;
+import com.jongho.openChat.application.repository.OpenChatRoomUserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 

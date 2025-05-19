@@ -1,6 +1,6 @@
-package com.jongho.openChatRoomUser.application.service;
+package com.jongho.openChat.application.service;
 
-import com.jongho.openChatRoomUser.domain.model.OpenChatRoomUser;
+import com.jongho.openChat.domain.model.OpenChatRoomUser;
 
 import java.util.Optional;
 

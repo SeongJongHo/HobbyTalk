@@ -4,8 +4,8 @@ import com.jongho.common.dao.BaseMapperTest;
 import com.jongho.openChat.dao.mapper.OpenChatRoomMapper;
 import com.jongho.openChat.domain.model.OpenChatRoom;
 import com.jongho.openChat.domain.model.redis.CachedOpenChatRoom;
-import com.jongho.openChatRoomUser.dao.mapper.OpenChatRoomUserMapper;
-import com.jongho.openChatRoomUser.domain.model.OpenChatRoomUser;
+import com.jongho.openChat.dao.mapper.OpenChatRoomUserMapper;
+import com.jongho.openChat.domain.model.OpenChatRoomUser;
 import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
 

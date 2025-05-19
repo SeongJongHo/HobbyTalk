@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "//mybatis.org/DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.jongho.openChatRoomUser.dao.mapper.OpenChatRoomUserMapper">
-    <insert id="createOpenChatRoomUser" parameterType="com.jongho.openChatRoomUser.domain.model.OpenChatRoomUser">
+<mapper namespace="com.jongho.openChat.dao.mapper.OpenChatRoomUserMapper">
+    <insert id="createOpenChatRoomUser" parameterType="com.jongho.openChat.domain.model.OpenChatRoomUser">
         INSERT INTO open_chat_room_users (open_chat_room_id, user_id )
         VALUES (#{openChatRoomId}, #{userId})
     </insert>
-    <select id="selectOneOpenChatRoomUserByOpenChatRoomIdAndUserId" parameterType="com.jongho.openChatRoomUser.domain.model.OpenChatRoomUser" resultType="com.jongho.openChatRoomUser.domain.model.OpenChatRoomUser">
+    <select id="selectOneOpenChatRoomUserByOpenChatRoomIdAndUserId" parameterType="com.jongho.openChat.domain.model.OpenChatRoomUser" resultType="com.jongho.openChat.domain.model.OpenChatRoomUser">
         SELECT open_chat_room_id, user_id, last_exit_time
         FROM open_chat_room_users
         WHERE open_chat_room_id = #{openChatRoomId}

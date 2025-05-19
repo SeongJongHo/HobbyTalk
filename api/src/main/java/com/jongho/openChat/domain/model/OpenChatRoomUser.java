@@ -1,4 +1,4 @@
-package com.jongho.openChatRoomUser.domain.model;
+package com.jongho.openChat.domain.model;
 
 import lombok.*;
 

@@ -10,8 +10,8 @@ import com.jongho.openChat.application.service.OpenChatRoomRedisService;
 import com.jongho.openChat.application.service.OpenChatRoomService;
 import com.jongho.openChat.domain.model.redis.CachedOpenChatRoom;
 import com.jongho.openChat.domain.model.redis.CachedOpenChatRoomConnectionInfo;
-import com.jongho.openChatRoomUser.application.service.OpenChatRoomUserService;
-import com.jongho.openChatRoomUser.domain.model.OpenChatRoomUser;
+import com.jongho.openChat.application.service.OpenChatRoomUserService;
+import com.jongho.openChat.domain.model.OpenChatRoomUser;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
