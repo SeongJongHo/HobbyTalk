@@ -1,4 +1,4 @@
-package com.jongho.openChat.application.scheduler;
+package com.jongho.openChat.presentation.scheduler;
 
 import com.jongho.common.lock.redis.RedisKey;
 import com.jongho.common.lock.service.LockService;

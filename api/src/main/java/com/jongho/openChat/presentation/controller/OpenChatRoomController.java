@@ -1,4 +1,4 @@
-package com.jongho.openChat.controller;
+package com.jongho.openChat.presentation.controller;
 
 import com.jongho.common.annotaition.HttpRequestLogging;
 import com.jongho.common.response.BaseMessageEnum;

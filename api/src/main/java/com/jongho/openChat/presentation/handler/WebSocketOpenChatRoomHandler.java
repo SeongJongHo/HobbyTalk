@@ -1,4 +1,4 @@
-package com.jongho.openChat.handler;
+package com.jongho.openChat.presentation.handler;
 
 import com.jongho.common.database.redis.RedisService;
 import com.jongho.common.util.websocket.BaseMessageTypeEnum;

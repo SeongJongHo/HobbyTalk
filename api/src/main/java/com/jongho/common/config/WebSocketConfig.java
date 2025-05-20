@@ -2,8 +2,8 @@ package com.jongho.common.config;
 
 import com.jongho.common.interceptor.WebSocketAuthInterceptor;
 import com.jongho.common.interceptor.WebSocketPathVariablesInterceptor;
-import com.jongho.openChat.handler.WebSocketOpenChatHandler;
-import com.jongho.openChat.handler.WebSocketOpenChatRoomHandler;
+import com.jongho.openChat.presentation.handler.WebSocketOpenChatHandler;
+import com.jongho.openChat.presentation.handler.WebSocketOpenChatRoomHandler;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.socket.config.annotation.EnableWebSocket;

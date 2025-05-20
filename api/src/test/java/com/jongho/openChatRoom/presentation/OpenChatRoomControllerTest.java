@@ -6,7 +6,7 @@ import com.jongho.common.interceptor.AuthInterceptor;
 import com.jongho.openChat.application.dto.request.OpenChatRoomCreateDto;
 import com.jongho.openChat.application.facade.OpenChatRoomFacade;
 import com.jongho.openChat.application.service.OpenChatRoomService;
-import com.jongho.openChat.controller.OpenChatRoomController;
+import com.jongho.openChat.presentation.controller.OpenChatRoomController;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
