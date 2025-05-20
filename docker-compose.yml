@@ -8,8 +8,7 @@ networks:
 services:
   mysql:
     image: mysql:8.0
-    container_name: mysql_container
-    restart: always
+    container_name: mysql
     environment:
       MYSQL_ROOT_PASSWORD: ${MYSQL_PASSWORD}
       MYSQL_DATABASE: ${MYSQL_DATABASE}
@@ -26,8 +25,7 @@ services:
 
   redis:
     image: redis:7.0
-    container_name: redis_container
-    restart: always
+    container_name: redis
     ports:
       - "${REDIS_PORT}:${REDIS_PORT}"
     networks:
