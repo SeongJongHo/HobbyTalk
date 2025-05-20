@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Optional;
 
 public interface CategoryRepository {
-    public List<Category> selectMainCategory();
-    public List<Category> selectSubCategory(Long parentId);
-    public Optional<Category> selectOneCategoryById(Long categoryId);
+    List<Category> selectMainCategory();
+    List<Category> selectSubCategory(Long parentId);
+    Optional<Category> selectOneCategoryById(Long categoryId);
 }

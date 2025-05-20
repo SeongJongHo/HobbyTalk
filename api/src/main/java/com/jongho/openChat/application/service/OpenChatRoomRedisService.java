@@ -8,17 +8,17 @@ import java.util.List;
 import java.util.Optional;
 
 public interface OpenChatRoomRedisService {
-    public List<Long> getOpenChatRoomIdList(Long userId);
-    public void createOpenChatRoomUserList(Long openChatRoomId, List<Long> userIdList);
-    public void createOpenChatRoomUserList(Long openChatRoomId, Long userId);
-    public void createOpenChatRoomLastMessage(Long openChatRoomId, OpenChat openChat);
-    public void createRedisOpenChatRoomConnectionInfo(Long userId, Long openChatRoomId, CachedOpenChatRoomConnectionInfo cachedOpenChatRoomConnectionInfo);
-    public Optional<OpenChat> getLastOpenChatByChatRoomId(Long openChatRoomId);
-    public List<Long> getOpenChatRoomUserList(Long openChatRoomId);
-    public CachedOpenChatRoomConnectionInfo getRedisOpenChatRoomConnectionInfo(Long userId, Long openChatRoomId);
-    public Optional<CachedOpenChatRoom> getOpenChatRoom(Long openChatRoomId);
-    public void updateInitUnreadChatCount(Long userId, Long openChatRoomId);
-    public void updateActiveChatRoom(Long userId, Long openChatRoomId, String activeFlag);
-    public void incrementUnreadMessageCount(Long userId, Long openChatRoomId);
-    public void updateLastExitTime(Long userId, Long openChatRoomId);
+    List<Long> getOpenChatRoomIdList(Long userId);
+    void createOpenChatRoomUserList(Long openChatRoomId, List<Long> userIdList);
+    void createOpenChatRoomUserList(Long openChatRoomId, Long userId);
+    void createOpenChatRoomLastMessage(Long openChatRoomId, OpenChat openChat);
+    void createRedisOpenChatRoomConnectionInfo(Long userId, Long openChatRoomId, CachedOpenChatRoomConnectionInfo cachedOpenChatRoomConnectionInfo);
+    Optional<OpenChat> getLastOpenChatByChatRoomId(Long openChatRoomId);
+    List<Long> getOpenChatRoomUserList(Long openChatRoomId);
+    CachedOpenChatRoomConnectionInfo getRedisOpenChatRoomConnectionInfo(Long userId, Long openChatRoomId);
+    Optional<CachedOpenChatRoom> getOpenChatRoom(Long openChatRoomId);
+    void updateInitUnreadChatCount(Long userId, Long openChatRoomId);
+    void updateActiveChatRoom(Long userId, Long openChatRoomId, String activeFlag);
+    void incrementUnreadMessageCount(Long userId, Long openChatRoomId);
+    void updateLastExitTime(Long userId, Long openChatRoomId);
 }

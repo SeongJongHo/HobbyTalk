@@ -7,7 +7,7 @@ import org.apache.ibatis.annotations.Param;
 @Mapper
 public interface OpenChatRoomMembershipRequestMapper {
 
-    public int countByRequesterIdAndStatus(@Param("requesterId") Long requesterId, @Param("status") int status);
-    public boolean existsByRequesterIdAndOpenChatRoomIdAndStatus(@Param("requesterId") Long requesterId, @Param("openChatRoomId") Long openChatRoomId, @Param("status") int status);
-    public void createOpenChatRoomMembershipRequest(OpenChatRoomMembershipRequest openChatRoomMembershipRequest);
+    int countByRequesterIdAndStatus(@Param("requesterId") Long requesterId, @Param("status") int status);
+    boolean existsByRequesterIdAndOpenChatRoomIdAndStatus(@Param("requesterId") Long requesterId, @Param("openChatRoomId") Long openChatRoomId, @Param("status") int status);
+    void createOpenChatRoomMembershipRequest(OpenChatRoomMembershipRequest openChatRoomMembershipRequest);
 }

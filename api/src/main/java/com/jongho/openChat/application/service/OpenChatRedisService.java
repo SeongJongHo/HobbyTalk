@@ -6,9 +6,9 @@ import java.util.List;
 import java.util.Optional;
 
 public interface OpenChatRedisService {
-    public Optional<OpenChat> getLastOpenChatByOpenChatRoomId(Long openChatRoomId);
-    public List<OpenChat> getOpenChatListByOpenChatRoomId(Long openChatRoomId);
-    public List<OpenChat> getOpenChatListByOpenChatRoomIdAndOffsetAndLimit(Long openChatRoomId, int offset, int limit);
-    public void createOpenChat(OpenChat openChat);
-    public void updateLastOpenChat(OpenChat openChat);
+    Optional<OpenChat> getLastOpenChatByOpenChatRoomId(Long openChatRoomId);
+    List<OpenChat> getOpenChatListByOpenChatRoomId(Long openChatRoomId);
+    List<OpenChat> getOpenChatListByOpenChatRoomIdAndOffsetAndLimit(Long openChatRoomId, int offset, int limit);
+    void createOpenChat(OpenChat openChat);
+    void updateLastOpenChat(OpenChat openChat);
 }

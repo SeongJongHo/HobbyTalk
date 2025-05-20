@@ -9,14 +9,14 @@ import java.util.List;
 
 @Mapper
 public interface OpenChatRoomMapper {
-    public int countByManagerId(Long managerId);
-    public void createOpenChatRoom(OpenChatRoom openChatRoom);
-    public void updateIncrementCurrentCapacity(@Param("id") Long id, @Param("currentAttendance") int currentAttendance);
-    public OpenChatRoom selectOneOpenChatRoomByIdForUpdate(@Param("id") Long id);
-    public OpenChatRoom selectOneOpenChatRoomById(@Param("id") Long id);
-    public void updateOpenChatRoomNotice(@Param("id") Long id, @Param("notice") String notice);
-    public OpenChatRoom selectOneOpenChatRoomByManagerIdAndTitle(@Param("managerId") Long managerId, @Param("title") String title);
-    public List<CachedOpenChatRoom> selectJoinOpenChatRoomByUserId(Long userId);
-    public List<Long> selectOpenChatRoomUser(Long openChatRoomId);
-    public CachedOpenChatRoom selectRedisOpenChatRoomById(Long openChatRoomId);
+    int countByManagerId(Long managerId);
+    void createOpenChatRoom(OpenChatRoom openChatRoom);
+    void updateIncrementCurrentCapacity(@Param("id") Long id, @Param("currentAttendance") int currentAttendance);
+    OpenChatRoom selectOneOpenChatRoomByIdForUpdate(@Param("id") Long id);
+    OpenChatRoom selectOneOpenChatRoomById(@Param("id") Long id);
+    void updateOpenChatRoomNotice(@Param("id") Long id, @Param("notice") String notice);
+    OpenChatRoom selectOneOpenChatRoomByManagerIdAndTitle(@Param("managerId") Long managerId, @Param("title") String title);
+    List<CachedOpenChatRoom> selectJoinOpenChatRoomByUserId(Long userId);
+    List<Long> selectOpenChatRoomUser(Long openChatRoomId);
+    CachedOpenChatRoom selectRedisOpenChatRoomById(Long openChatRoomId);
 }

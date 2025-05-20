@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Optional;
 
 public interface OpenChatService {
-    public Optional<OpenChat> getLastOpenChatByOpenChatRoomId(Long openChatRoomId);
-    public int getUnReadOpenChatCountByOpenChatRoomIdAndLastExitTime(Long openChatRoomId, String lastExitTime, int limit);
-    public List<OpenChatDto> getOpenChatByOpenChatRoomIdAndLastCreatedTime(Long openChatRoomId, String lastCreatedTime, int limit);
+    Optional<OpenChat> getLastOpenChatByOpenChatRoomId(Long openChatRoomId);
+    int getUnReadOpenChatCountByOpenChatRoomIdAndLastExitTime(Long openChatRoomId, String lastExitTime, int limit);
+    List<OpenChatDto> getOpenChatByOpenChatRoomIdAndLastCreatedTime(Long openChatRoomId, String lastCreatedTime, int limit);
 }

@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Optional;
 
 public interface OpenChatRepository {
-    public Optional<OpenChat> selectLastOpenChatByChatRoomId(Long openChatRoomId);
-    public int selectUnReadOpenChatCountByChatRoomIdAndLastExitTime(Long openChatRoomId, String lastExitTime, int limit);
-    public List<OpenChatDto> selectOpenChatByChatRoomIdAndLastCreatedTime(Long openChatRoomId, String lastCreatedTime, int limit);
+    Optional<OpenChat> selectLastOpenChatByChatRoomId(Long openChatRoomId);
+    int selectUnReadOpenChatCountByChatRoomIdAndLastExitTime(Long openChatRoomId, String lastExitTime, int limit);
+    List<OpenChatDto> selectOpenChatByChatRoomIdAndLastCreatedTime(Long openChatRoomId, String lastCreatedTime, int limit);
 }

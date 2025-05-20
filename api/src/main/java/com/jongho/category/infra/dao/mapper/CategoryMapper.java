@@ -7,7 +7,7 @@ import java.util.List;
 
 @Mapper
 public interface CategoryMapper {
-    public List<Category> selectMainCategory();
-    public List<Category> selectSubCategory(Long parentId);
-    public Category selectOneCategoryById(Long categoryId);
+    List<Category> selectMainCategory();
+    List<Category> selectSubCategory(Long parentId);
+    Category selectOneCategoryById(Long categoryId);
 }

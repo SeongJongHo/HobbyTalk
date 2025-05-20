@@ -7,14 +7,14 @@ import java.util.List;
 import java.util.Optional;
 
 public interface OpenChatRoomRepository {
-    public int countByManagerId(Long managerId);
-    public void createOpenChatRoom(OpenChatRoom openChatRoom);
-    public void updateIncrementCurrentCapacity(Long openChatRoomId, int currentAttendance);
-    public Optional<OpenChatRoom> selectOneOpenChatRoomByManagerIdAndTitle(Long managerId, String title);
-    public Optional<OpenChatRoom> selectOneOpenChatRoomByIdForUpdate(Long openChatRoomId);
-    public Optional<OpenChatRoom> selectOneOpenChatRoomById(Long openChatRoomId);
-    public void updateOpenChatRoomNotice(Long openChatRoomId, String notice);
-    public List<CachedOpenChatRoom> selectJoinOpenChatRoomByUserId(Long userId);
-    public List<Long> selectOpenChatRoomUser(Long openChatRoomId);
-    public Optional<CachedOpenChatRoom> selectRedisOpenChatRoomById(Long openChatRoomId);
+    int countByManagerId(Long managerId);
+    void createOpenChatRoom(OpenChatRoom openChatRoom);
+    void updateIncrementCurrentCapacity(Long openChatRoomId, int currentAttendance);
+    Optional<OpenChatRoom> selectOneOpenChatRoomByManagerIdAndTitle(Long managerId, String title);
+    Optional<OpenChatRoom> selectOneOpenChatRoomByIdForUpdate(Long openChatRoomId);
+    Optional<OpenChatRoom> selectOneOpenChatRoomById(Long openChatRoomId);
+    void updateOpenChatRoomNotice(Long openChatRoomId, String notice);
+    List<CachedOpenChatRoom> selectJoinOpenChatRoomByUserId(Long userId);
+    List<Long> selectOpenChatRoomUser(Long openChatRoomId);
+    Optional<CachedOpenChatRoom> selectRedisOpenChatRoomById(Long openChatRoomId);
 }

@@ -9,12 +9,12 @@ import java.util.List;
 
 @Mapper
 public interface OpenChatMapper {
-    public OpenChat selectLastOpenChatByChatRoomId(Long openChatRoomId);
-    public int selectUnReadOpenChatCountByChatRoomIdAndLastExitTime(
+    OpenChat selectLastOpenChatByChatRoomId(Long openChatRoomId);
+    int selectUnReadOpenChatCountByChatRoomIdAndLastExitTime(
             @Param("openChatRoomId") Long openChatRoomId,
             @Param("lastExitTime") String lastExitTime,
             @Param("limit") int limit);
-    public List<OpenChatDto> selectOpenChatByChatRoomIdAndLastCreatedTime(
+    List<OpenChatDto> selectOpenChatByChatRoomIdAndLastCreatedTime(
             @Param("openChatRoomId") Long openChatRoomId,
             @Param("lastCreatedTime") String lastCreatedTime,
             @Param("limit") int limit);

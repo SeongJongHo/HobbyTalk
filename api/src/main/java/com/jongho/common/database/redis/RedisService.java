@@ -7,10 +7,10 @@ import org.springframework.web.socket.WebSocketSession;
 import java.util.List;
 
 public interface RedisService {
-    public void publish(String channel, String message);
-    public void subscribe(String channel, WebSocketSession session);
-    public void subscribe(List<String> channel, WebSocketSession session);
-    public BaseWebSocketMessage convertStringMessageToBaseWebSocketMessage(TextMessage message);
-    public <T> T dataToObject(String data, Class<T> valueType);
-    public String objectToData(Object object);
+    void publish(String channel, String message);
+    void subscribe(String channel, WebSocketSession session);
+    void subscribe(List<String> channel, WebSocketSession session);
+    BaseWebSocketMessage convertStringMessageToBaseWebSocketMessage(TextMessage message);
+    <T> T dataToObject(String data, Class<T> valueType);
+    String objectToData(Object object);
 }
