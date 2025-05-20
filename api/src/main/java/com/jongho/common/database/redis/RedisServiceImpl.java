@@ -51,7 +51,9 @@ class RedisMessageHandler implements MessageListener {
     public void onMessage(@NotNull Message message, byte[] pattern) {
         try {
             if(session.isOpen()){
-                session.sendMessage(new TextMessage(new String(message.getBody())));
+                synchronized (session) {
+                    session.sendMessage(new TextMessage(new String(message.getBody())));
+                }
             }
         } catch (IOException e) {
             log.error(e.getMessage());
