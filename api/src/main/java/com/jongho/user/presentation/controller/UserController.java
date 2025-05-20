@@ -10,11 +10,15 @@ import com.jongho.user.application.facade.AuthUserFacade;
 import com.jongho.user.application.facade.UserFacade;
 import com.jongho.user.application.service.UserService;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.http.ResponseEntity;
 
+@Tag(name = "User", description = "유저 API")
 @HttpRequestLogging
 @RestController
 @RequestMapping("/api/v1/users")
@@ -24,13 +28,15 @@ public class UserController {
     private final UserFacade userFacade;
     private final AuthUserFacade authUserFacade;
 
+    @Operation(summary = "회원가입")
     @PostMapping("/sign-up")
-    public ResponseEntity<BaseResponseEntity<?>> signUp(@Validated @RequestBody UserSignUpDto userSignUpDto) {
+    public ResponseEntity<BaseResponseEntity<?>> signUp(@Parameter @Validated @RequestBody UserSignUpDto userSignUpDto) {
         userFacade.signUpUserAndCreateNotificationSetting(userSignUpDto);
 
         return BaseResponseEntity.create("user create");
     }
 
+    @Operation(summary = "로그인")
     @PostMapping("/sign-in")
     public ResponseEntity<BaseResponseEntity<TokenResponseDto>> signIn(@Validated @RequestBody UserSignInDto userSignUpDto) {
         TokenResponseDto result = authUserFacade.signIn(userSignUpDto.getUsername(), userSignUpDto.getPassword());
@@ -38,6 +44,7 @@ public class UserController {
         return BaseResponseEntity.ok(result, "success");
     }
 
+    @Operation(summary = "토큰 리프레시")
     @PostMapping("/token-refresh")
     public ResponseEntity<BaseResponseEntity<TokenResponseDto>> tokenRefresh(@RequestBody TokenRefreshDto tokenRefreshDto) {
         TokenResponseDto result = authUserFacade.tokenRefresh(tokenRefreshDto.getRefreshToken());

@@ -6,7 +6,6 @@ import com.jongho.user.application.service.UserService;
 import com.jongho.user.domain.model.User;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
@@ -18,7 +17,7 @@ public class UserFacadeImpl implements UserFacade{
     @Transactional
     public void signUpUserAndCreateNotificationSetting(UserSignUpDto userSignUpDto) {
         userService.signUp(userSignUpDto);
-        User user = userService.getUser(userSignUpDto.getUsername());
+        User user = userService.getUser(userSignUpDto.username());
         userNotificationSettingService.createUserNotificationSetting(user.getId());
     }
 }

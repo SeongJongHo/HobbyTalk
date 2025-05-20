@@ -22,23 +22,23 @@ public class UserServiceImpl implements UserService {
     @Override
     @Transactional(propagation = Propagation.REQUIRES_NEW)
     public void signUp(UserSignUpDto userSignUpDto) {
-        userRepository.findOneByUsername(userSignUpDto.getUsername())
+        userRepository.findOneByUsername(userSignUpDto.username())
                 .ifPresent((user)-> {
                     throw new UserDuplicatedException("이미 존재하는 아이디입니다.");
                 });
 
-        userRepository.findOneByPhoneNumber(userSignUpDto.getPhoneNumber())
+        userRepository.findOneByPhoneNumber(userSignUpDto.phoneNumber())
                 .ifPresent((user)-> {
                     throw new UserDuplicatedException("이미 가입된 전화번호입니다.");
                 });
         try {
             userRepository.createUser(
                 new UserSignUpDto(
-                    userSignUpDto.getNickname(),
-                    BcryptUtil.hashPassword(userSignUpDto.getPassword()),
-                    userSignUpDto.getUsername(),
-                    userSignUpDto.getPhoneNumber(),
-                    userSignUpDto.getProfileImage()
+                    userSignUpDto.nickname(),
+                    BcryptUtil.hashPassword(userSignUpDto.password()),
+                    userSignUpDto.username(),
+                    userSignUpDto.phoneNumber(),
+                    userSignUpDto.profileImage()
                 ).toUser()
             );
         } catch (DataIntegrityViolationException e) {

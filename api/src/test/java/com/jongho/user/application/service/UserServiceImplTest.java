@@ -41,7 +41,7 @@ public class UserServiceImplTest {
         @DisplayName("UserRepository.findByUsername()을 호출하고 결과가 있으면 UserDuplicatedException을 발생시킨다.")
         void 유저_아이디가_중복된_경우_UserDuplicatedException을_발생시킨다() {
             // given
-            when(userRepository.findOneByUsername(user.getUsername())).thenReturn(Optional.of(user.toUser()));
+            when(userRepository.findOneByUsername(user.username())).thenReturn(Optional.of(user.toUser()));
 
             // when // then
             UserDuplicatedException e = assertThrows(UserDuplicatedException.class, () -> userService.signUp(user));
@@ -52,7 +52,7 @@ public class UserServiceImplTest {
         @DisplayName("UserRepository.findByPhoneNumber()을 호출하고 결과가 있으면 UserDuplicatedException을 발생시킨다.")
         void 유저_핸드폰번호가_중복된_경우_UserDuplicatedException을_발생시킨다() {
             // given
-            when(userRepository.findOneByPhoneNumber(user.getPhoneNumber())).thenReturn(Optional.of(user.toUser()));
+            when(userRepository.findOneByPhoneNumber(user.phoneNumber())).thenReturn(Optional.of(user.toUser()));
 
             // when // then
             UserDuplicatedException e = assertThrows(UserDuplicatedException.class, () -> userService.signUp(user));
@@ -63,8 +63,8 @@ public class UserServiceImplTest {
         @DisplayName("핸드폰번호와 아이디가 중복되지 않으면 유저를 생성하고 회원가입이 완료된다.")
         void 핸드폰번호와_아이디가_중복되지_않으면_유저를_생성하고_회원가입이_완료된다() {
             // given
-            when(userRepository.findOneByUsername(user.getUsername())).thenReturn(Optional.empty());
-            when(userRepository.findOneByPhoneNumber(user.getPhoneNumber())).thenReturn(Optional.empty());
+            when(userRepository.findOneByUsername(user.username())).thenReturn(Optional.empty());
+            when(userRepository.findOneByPhoneNumber(user.phoneNumber())).thenReturn(Optional.empty());
 
             // when
             userService.signUp(user);

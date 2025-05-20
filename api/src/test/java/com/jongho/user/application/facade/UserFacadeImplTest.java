@@ -32,7 +32,7 @@ public class UserFacadeImplTest {
         void 유저_회원가입과_알림_설정을_생성한다() {
             // given
             UserSignUpDto userSignUpDto = new UserSignUpDto("jonghao", "a123b123", "whdgh9595", "01012341234", null);
-            when(userService.getUser(userSignUpDto.getUsername())).thenReturn(new User(1L, userSignUpDto.getNickname(), userSignUpDto.getPassword(), userSignUpDto.getUsername(), userSignUpDto.getPhoneNumber(), userSignUpDto.getProfileImage()));
+            when(userService.getUser(userSignUpDto.username())).thenReturn(new User(1L, userSignUpDto.nickname(), userSignUpDto.password(), userSignUpDto.username(), userSignUpDto.phoneNumber(), userSignUpDto.profileImage()));
             doNothing().when(userService).signUp(userSignUpDto);
             doNothing().when(userNotificationSettingService).createUserNotificationSetting(1L);
 
@@ -41,7 +41,7 @@ public class UserFacadeImplTest {
 
             // then
              verify(userService, times(1)).signUp(userSignUpDto);
-             verify(userService, times(1)).getUser(userSignUpDto.getUsername());
+             verify(userService, times(1)).getUser(userSignUpDto.username());
              verify(userNotificationSettingService, times(1)).createUserNotificationSetting(1L);
         }
     }

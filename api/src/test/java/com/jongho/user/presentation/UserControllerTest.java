@@ -1,6 +1,5 @@
 package com.jongho.user.presentation;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 import com.google.gson.Gson;
 import com.jongho.common.config.WebMvcConfig;
 import com.jongho.common.interceptor.AuthInterceptor;
@@ -63,11 +62,11 @@ public class UserControllerTest {
             doNothing().when(userFacade).signUpUserAndCreateNotificationSetting(userSignUpDto);
             Gson gson = new Gson();
             String userSignUpDtoJson = gson.toJson(Map.of(
-                    "nickname", userSignUpDto.getNickname(),
-                    "password", userSignUpDto.getPassword(),
-                    "username", userSignUpDto.getUsername(),
-                    "phone_number", userSignUpDto.getPhoneNumber(),
-                    "profile_image", userSignUpDto.getProfileImage()
+                    "nickname", userSignUpDto.nickname(),
+                    "password", userSignUpDto.password(),
+                    "username", userSignUpDto.username(),
+                    "phone_number", userSignUpDto.phoneNumber(),
+                    "profile_image", userSignUpDto.profileImage()
             ));
 
             // when
