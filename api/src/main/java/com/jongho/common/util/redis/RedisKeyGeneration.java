@@ -1,6 +1,7 @@
 package com.jongho.common.util.redis;
 
 public class RedisKeyGeneration {
+    public static int MOD = 100;
     public static String getChatRoomConnectionInfoKey(Long userId, Long openChatRoomId) {
         return "users:" + userId + ":chatRooms:" + openChatRoomId + ":connectionInfo";
     }
@@ -12,6 +13,21 @@ public class RedisKeyGeneration {
     }
     public static String getChatRoomMessageKey(Long openChatRoomId) {
         return "chatRooms:" + openChatRoomId + ":chats";
+    }
+    public static String getChatMessageKey(Long openChatRoomId, Long chatId) {
+        return "chatRooms:" + openChatRoomId + ":chats:" + chatId;
+    }
+    public static String getChatRoomProcessingKey(Long openChatRoomId) {
+        return "chatGroups:" + openChatRoomId + ":processing";
+    }
+    public static String getChatGroupModKey(Long chatRoomId) {
+        return "chatGroups:" + (chatRoomId % MOD);
+    }
+    public static String getChatGroupKey(Long groupId) {
+        return "chatGroups:" + groupId;
+    }
+    public static String getChatGroupProcessingKey(Long groupId) {
+        return "chatGroups:" + groupId + ":processing";
     }
     public static String getLastMessageKey(Long openChatRoomId) {
         return "chatRooms:" + openChatRoomId + ":lastMessage";

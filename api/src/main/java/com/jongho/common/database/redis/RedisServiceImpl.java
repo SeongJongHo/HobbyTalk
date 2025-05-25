@@ -1,6 +1,7 @@
 package com.jongho.common.database.redis;
 
 import com.jongho.common.util.redis.BaseRedisTemplate;
+import com.jongho.common.util.serializer.DataSerializer;
 import com.jongho.common.util.websocket.BaseWebSocketMessage;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
@@ -32,7 +33,7 @@ public class RedisServiceImpl implements RedisService{
         return new RedisMessageHandler(session);
     }
     public BaseWebSocketMessage convertStringMessageToBaseWebSocketMessage(TextMessage message){
-        return baseRedisTemplate.getWebSocketMessage(message);
+        return DataSerializer.deserialize(message.getPayload(), BaseWebSocketMessage.class);
     }
     public <T> T dataToObject(String data, Class<T> valueType){
         return baseRedisTemplate.toObject(data, valueType);

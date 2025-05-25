@@ -2,6 +2,7 @@ package com.jongho.common.util.redis;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.jongho.common.exception.MyJsonProcessingException;
+import com.jongho.common.util.serializer.DataSerializer;
 import com.jongho.common.util.websocket.BaseWebSocketMessage;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.redis.connection.MessageListener;
@@ -16,70 +17,35 @@ import java.util.stream.Collectors;
 
 @Component
 @RequiredArgsConstructor
-public class BaseRedisTemplate {
+public class BaseRedisTemplate  {
     private final StringRedisTemplate stringRedisTemplate;
-    private static final ObjectMapper objectMapper = new ObjectMapper();
-    public <T> void setData(String key, T value) {
+
+    public <T> void set(String key, T value) {
         stringRedisTemplate.opsForValue().set(key, toJson(value));
     }
 
-    public <T> T getData(String key, Class<T> valueType) {
+    public <T> T get(String key, Class<T> valueType) {
         String jsonValue = stringRedisTemplate.opsForValue().get(key);
-        if(jsonValue == null){
-            return null;
-        }
-        return toObject(jsonValue, valueType);
+
+        return jsonValue == null? null: toObject(jsonValue, valueType);
     }
 
-    public <T> List<T> getAllListData(String key, Class<T> valueType) {
-        List<String> jsonValue = stringRedisTemplate.opsForList().range(key, 0, -1);
-        if(jsonValue == null){
-            return null;
-        }
-        return mappingToElement(jsonValue, valueType);
-    }
-
-    public <T> List<T> getReverseRangeAllListData(String key, Class<T> valueType) {
-        List<String> jsonValue = stringRedisTemplate.opsForList().range(key, 0, -1);
-        if(jsonValue == null){
-            return null;
-        }
-        List<T> result = mappingToElement(jsonValue, valueType);
-        Collections.reverse(result);
-
-        return result;
-    }
-
-    public <T> List<T> getReverseRangeListData(String key, Class<T> valueType, int offset, int limit) {
-        List<String> jsonValue = stringRedisTemplate.opsForList().range(key, offset, limit);
-        if(jsonValue == null){
-            return null;
-        }
-        List<T> result = mappingToElement(jsonValue, valueType);
-        Collections.reverse(result);
-
-        return result;
-    }
-
-    public <T> List<T> popListData(String key, Class<T> valueType, int limit) {
+    public <T> List<T> popList(String key, Class<T> valueType, int limit) {
         List<String> jsonValue = stringRedisTemplate.opsForList().leftPop(key, limit);
-        if(jsonValue == null){
-            return null;
-        }
 
-        return mappingToElement(jsonValue, valueType);
+        return jsonValue == null? null: mappingToElement(jsonValue, valueType);
     }
 
 
-    public <T> void setAllListData(String key, List<T> value) {
+    public <T> void rPushList(String key, List<T> value) {
         stringRedisTemplate.opsForList().rightPushAll(key, value.stream().map(this::toJson).collect(Collectors.toList()));
     }
 
-    public <T> void setListData(String key, T value) {
+    public <T> void rPushList(String key, T value) {
         stringRedisTemplate.opsForList().rightPush(key, toJson(value));
     }
 
-    public <T> List<T> getListData(String key, Class<T> valueType, int offset, int limit) {
+    public <T> List<T> getList(String key, Class<T> valueType, int offset, int limit) {
         List<String> jsonValue = stringRedisTemplate.opsForList().range(key, offset, limit);
         if(jsonValue == null){
             return null;
@@ -87,14 +53,25 @@ public class BaseRedisTemplate {
         return mappingToElement(jsonValue, valueType);
     }
 
-    public void setHashData(String key, Map<String, String> value) {
+    public <T> List<T> getReverseList(String key, Class<T> valueType, int offset, int limit) {
+        List<String> jsonValue = stringRedisTemplate.opsForList().range(key, offset, limit);
+        if(jsonValue == null){
+            return null;
+        }
+        List<T> result = mappingToElement(jsonValue, valueType);
+        Collections.reverse(result);
+
+        return result;
+    }
+
+    public void putHash(String key, Map<String, String> value) {
         stringRedisTemplate.opsForHash().putAll(key, value);
     }
 
-    public <T> void setHashDataColumn(String key, String column, T value) {
+    public <T> void putHash(String key, String column, T value) {
         stringRedisTemplate.opsForHash().put(key, column, value);
     }
-    public void incrementHashDataColumn(String key, String column, int value) {
+    public void incrementHash(String key, String column, int value) {
         stringRedisTemplate.opsForHash().increment(key, column, value);
     }
 
@@ -102,12 +79,10 @@ public class BaseRedisTemplate {
         return stringRedisTemplate.scan(options);
     }
 
-    public <T> T getHashData(String key, Class<T> valueType) {
+    public <T> T getHash(String key, Class<T> valueType) {
         Map<Object, Object> map = stringRedisTemplate.opsForHash().entries(key);
-        if(map.isEmpty()){
-            return null;
-        }
-        return mapToObject(map, valueType);
+
+        return map.isEmpty()? null: mapToObject(map, valueType);
     }
 
     public void publish(String channel, String message) {
@@ -125,36 +100,15 @@ public class BaseRedisTemplate {
     }
 
     public <T> T toObject(String json, Class<T> valueType) {
-        try {
-            return objectMapper.readValue(json, valueType);
-        }catch (Exception e) {
-            throw new MyJsonProcessingException(e.getMessage()!=null? e.getMessage():"json processing error");
-        }
+        return DataSerializer.deserialize(json, valueType);
     }
 
     public <T> T mapToObject(Map<Object, Object> map, Class<T> valueType) {
-        try {
-            return objectMapper.convertValue(map, valueType);
-        }catch (Exception e) {
-            throw new MyJsonProcessingException(e.getMessage()!=null? e.getMessage():"json processing error");
-        }
+        return DataSerializer.deserialize(map, valueType);
     }
 
     public String toJson(Object value) {
-        try {
-            return objectMapper.writeValueAsString(value);
-        }catch (Exception e) {
-            throw new MyJsonProcessingException(e.getMessage()!=null? e.getMessage():"json processing error");
-        }
-    }
-
-    public BaseWebSocketMessage getWebSocketMessage(TextMessage textMessage){
-        try {
-            return objectMapper.readValue(textMessage.getPayload(), BaseWebSocketMessage.class);
-        }catch (Exception e) {
-            throw new MyJsonProcessingException(e.getMessage()!=null? e.getMessage():"json processing error");
-        }
-
+        return DataSerializer.serialize(value);
     }
 
     private <T> List<T> mappingToElement(Collection<String> jsonList, Class<T> valueType){
