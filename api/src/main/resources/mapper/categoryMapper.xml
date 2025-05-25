@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "//mybatis.org/DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.jongho.category.infra.dao.mapper.CategoryMapper">
+<mapper namespace="com.jongho.category.infra.mapper.CategoryMapper">
     <select id="selectMainCategory" resultType="com.jongho.category.domain.model.Category">
         SELECT
             id,

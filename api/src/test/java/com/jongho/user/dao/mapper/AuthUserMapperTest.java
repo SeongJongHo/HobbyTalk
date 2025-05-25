@@ -2,6 +2,7 @@ package com.jongho.user.dao.mapper;
 
 import com.jongho.common.dao.BaseMapperTest;
 import com.jongho.user.domain.model.AuthUser;
+import com.jongho.user.infra.mapper.AuthUserMapper;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;

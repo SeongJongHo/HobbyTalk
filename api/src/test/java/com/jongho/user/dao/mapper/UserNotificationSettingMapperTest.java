@@ -2,6 +2,7 @@ package com.jongho.user.dao.mapper;
 
 import com.jongho.common.dao.BaseMapperTest;
 import com.jongho.user.domain.model.UserNotificationSetting;
+import com.jongho.user.infra.mapper.UserNotificationSettingMapper;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;

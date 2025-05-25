@@ -1,7 +1,7 @@
 package com.jongho.openChat.common.config;
 
-import com.jongho.openChat.dao.step.MyBatisMessageItemWriter;
-import com.jongho.openChat.dao.step.RedisMessageItemReader;
+import com.jongho.openChat.infra.step.MyBatisMessageItemWriter;
+import com.jongho.openChat.infra.step.RedisMessageItemReader;
 import com.jongho.openChat.domain.model.OpenChat;
 import lombok.RequiredArgsConstructor;
 import org.springframework.batch.core.Job;

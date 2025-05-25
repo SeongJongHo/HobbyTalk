@@ -1,7 +1,7 @@
 package com.jongho.openChatRoomMembershipRequest.dao.mapper;
 
 import com.jongho.openChat.common.enums.MembershipRequestStatusEnum;
-import com.jongho.openChat.dao.mapper.OpenChatRoomMembershipRequestMapper;
+import com.jongho.openChat.infra.mapper.OpenChatRoomMembershipRequestMapper;
 import com.jongho.openChat.domain.model.OpenChatRoomMembershipRequest;
 import com.jongho.common.dao.BaseMapperTest;
 import org.junit.jupiter.api.BeforeEach;
