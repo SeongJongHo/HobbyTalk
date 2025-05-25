@@ -6,8 +6,8 @@ import com.jongho.common.response.BaseResponseEntity;
 import com.jongho.common.util.jwt.AccessPayload;
 import com.jongho.common.util.jwt.JwtUtil;
 import com.jongho.common.util.threadlocal.AuthenticatedUserThreadLocalManager;
-import com.jongho.user.application.service.AuthUserServiceImpl;
-import com.jongho.user.application.service.UserServiceImpl;
+import com.jongho.user.application.service.AuthUserService;
+import com.jongho.user.application.service.UserService;
 import com.jongho.user.domain.model.AuthUser;
 import com.jongho.user.domain.model.User;
 import jakarta.servlet.http.HttpServletRequest;
@@ -23,8 +23,8 @@ import org.springframework.web.servlet.HandlerInterceptor;
 @RequiredArgsConstructor
 public class AuthInterceptor implements HandlerInterceptor {
     private final JwtUtil jwtUtil;
-    private final AuthUserServiceImpl authUserService;
-    private final UserServiceImpl userService;
+    private final AuthUserService authUserService;
+    private final UserService userService;
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {

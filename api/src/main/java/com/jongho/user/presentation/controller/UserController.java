@@ -6,9 +6,9 @@ import com.jongho.user.application.dto.request.TokenRefreshDto;
 import com.jongho.user.application.dto.request.UserSignInDto;
 import com.jongho.user.application.dto.request.UserSignUpDto;
 import com.jongho.user.application.dto.response.TokenResponseDto;
-import com.jongho.user.application.facade.AuthUserFacadeImpl;
-import com.jongho.user.application.facade.UserFacadeImpl;
-import com.jongho.user.application.service.UserServiceImpl;
+import com.jongho.user.application.facade.AuthUserFacade;
+import com.jongho.user.application.facade.UserFacade;
+import com.jongho.user.application.service.UserService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -27,9 +27,9 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 public class UserController {
 
-    private final UserServiceImpl userService;
-    private final UserFacadeImpl userFacade;
-    private final AuthUserFacadeImpl authUserFacade;
+    private final UserService userService;
+    private final UserFacade userFacade;
+    private final AuthUserFacade authUserFacade;
 
     @Operation(summary = "회원가입")
     @PostMapping("/sign-up")

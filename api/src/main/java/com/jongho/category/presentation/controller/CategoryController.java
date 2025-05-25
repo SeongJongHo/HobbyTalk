@@ -1,6 +1,6 @@
 package com.jongho.category.presentation.controller;
 
-import com.jongho.category.application.service.CategoryServiceImpl;
+import com.jongho.category.application.service.CategoryService;
 import com.jongho.common.annotaition.HttpRequestLogging;
 import com.jongho.common.response.BaseResponseEntity;
 import io.swagger.v3.oas.annotations.Operation;
@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/api/v1/categories")
 @RequiredArgsConstructor
 public class CategoryController {
-    private final CategoryServiceImpl categoryService;
+    private final CategoryService categoryService;
 
     @Operation(summary = "카테고리 조회")
     @GetMapping("/main")

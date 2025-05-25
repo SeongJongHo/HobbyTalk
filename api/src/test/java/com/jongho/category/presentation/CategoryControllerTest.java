@@ -8,7 +8,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-import com.jongho.category.application.service.CategoryServiceImpl;
+import com.jongho.category.application.service.CategoryService;
 import com.jongho.category.domain.model.Category;
 import com.jongho.category.presentation.controller.CategoryController;
 import com.jongho.common.config.WebMvcConfig;
@@ -32,7 +32,7 @@ import org.springframework.test.web.servlet.MockMvc;
 @DisplayName("CategoryController 클래스")
 public class CategoryControllerTest {
     @MockBean
-    private CategoryServiceImpl categoryService;
+    private CategoryService categoryService;
     @Autowired
     private MockMvc mockMvc;
 

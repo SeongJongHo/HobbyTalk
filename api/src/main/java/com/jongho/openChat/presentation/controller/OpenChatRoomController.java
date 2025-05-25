@@ -8,8 +8,8 @@ import com.jongho.openChat.application.dto.request.OpenChatRoomCreateDto;
 import com.jongho.openChat.application.dto.request.OpenChatRoomJoinDto;
 import com.jongho.openChat.application.dto.request.OpenChatRoomMembershipRequestDto;
 import com.jongho.openChat.application.dto.request.OpenChatRoomNoticeUpdateDto;
-import com.jongho.openChat.application.facade.OpenChatRoomFacadeImpl;
-import com.jongho.openChat.application.service.OpenChatRoomServiceImpl;
+import com.jongho.openChat.application.facade.OpenChatRoomFacade;
+import com.jongho.openChat.application.service.OpenChatRoomService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
@@ -29,8 +29,8 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/v1/open-chat-rooms")
 public class OpenChatRoomController {
 
-    private final OpenChatRoomFacadeImpl openChatRoomFacade;
-    private final OpenChatRoomServiceImpl openChatRoomService;
+    private final OpenChatRoomFacade openChatRoomFacade;
+    private final OpenChatRoomService openChatRoomService;
 
     @Operation(summary = "오픈채팅방 생성")
     @PostMapping

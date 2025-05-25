@@ -2,8 +2,8 @@ package com.jongho.common.interceptor;
 
 import com.google.gson.Gson;
 import com.jongho.common.response.BaseResponseEntity;
-import com.jongho.openChat.application.service.OpenChatRoomServiceImpl;
-import com.jongho.openChat.application.service.OpenChatRoomUserServiceImpl;
+import com.jongho.openChat.application.service.OpenChatRoomService;
+import com.jongho.openChat.application.service.OpenChatRoomUserService;
 import com.jongho.openChat.domain.model.OpenChatRoom;
 import com.jongho.openChat.domain.model.OpenChatRoomUser;
 import jakarta.servlet.http.HttpServletResponse;
@@ -27,8 +27,8 @@ import org.springframework.web.socket.server.HandshakeInterceptor;
 @RequiredArgsConstructor
 public class WebSocketPathVariablesInterceptor implements HandshakeInterceptor {
 
-    private final OpenChatRoomServiceImpl openChatRoomService;
-    private final OpenChatRoomUserServiceImpl openChatRoomUserService;
+    private final OpenChatRoomService openChatRoomService;
+    private final OpenChatRoomUserService openChatRoomUserService;
 
     /**
      * WebSocket 연결 전에

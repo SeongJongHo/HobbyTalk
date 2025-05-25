@@ -11,8 +11,8 @@ import com.google.gson.Gson;
 import com.jongho.common.config.WebMvcConfig;
 import com.jongho.common.interceptor.AuthInterceptor;
 import com.jongho.openChat.application.dto.request.OpenChatRoomCreateDto;
-import com.jongho.openChat.application.facade.OpenChatRoomFacadeImpl;
-import com.jongho.openChat.application.service.OpenChatRoomServiceImpl;
+import com.jongho.openChat.application.facade.OpenChatRoomFacade;
+import com.jongho.openChat.application.service.OpenChatRoomService;
 import com.jongho.openChat.presentation.controller.OpenChatRoomController;
 import java.util.Map;
 import org.junit.jupiter.api.BeforeEach;
@@ -34,9 +34,9 @@ import org.springframework.test.web.servlet.MockMvc;
 @DisplayName("OpenChatRoomController 클래스")
 public class OpenChatRoomControllerTest {
     @MockBean
-    private OpenChatRoomFacadeImpl openChatRoomFacade;
+    private OpenChatRoomFacade openChatRoomFacade;
     @MockBean
-    private OpenChatRoomServiceImpl openChatRoomService;
+    private OpenChatRoomService openChatRoomService;
     @Autowired
     private MockMvc mockMvc;
 

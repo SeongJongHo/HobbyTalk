@@ -5,8 +5,8 @@ import com.jongho.common.exception.UnAuthorizedException;
 import com.jongho.common.response.BaseResponseEntity;
 import com.jongho.common.util.jwt.AccessPayload;
 import com.jongho.common.util.jwt.JwtUtil;
-import com.jongho.user.application.service.AuthUserServiceImpl;
-import com.jongho.user.application.service.UserServiceImpl;
+import com.jongho.user.application.service.AuthUserService;
+import com.jongho.user.application.service.UserService;
 import com.jongho.user.domain.model.AuthUser;
 import com.jongho.user.domain.model.User;
 import jakarta.servlet.http.HttpServletRequest;
@@ -28,8 +28,8 @@ import org.springframework.web.socket.server.HandshakeInterceptor;
 @RequiredArgsConstructor
 public class WebSocketAuthInterceptor implements HandshakeInterceptor {
     private final JwtUtil jwtUtil;
-    private final AuthUserServiceImpl authUserService;
-    private final UserServiceImpl userService;
+    private final AuthUserService authUserService;
+    private final UserService userService;
 
     @Override
     public boolean beforeHandshake(ServerHttpRequest request, ServerHttpResponse response,
