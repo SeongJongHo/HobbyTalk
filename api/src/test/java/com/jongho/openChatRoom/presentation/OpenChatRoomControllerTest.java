@@ -1,13 +1,20 @@
 package com.jongho.openChatRoom.presentation;
 
+import static org.mockito.Mockito.doNothing;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.patch;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
 import com.google.gson.Gson;
 import com.jongho.common.config.WebMvcConfig;
 import com.jongho.common.interceptor.AuthInterceptor;
 import com.jongho.openChat.application.dto.request.OpenChatRoomCreateDto;
-import com.jongho.openChat.application.facade.OpenChatRoomFacade;
-import com.jongho.openChat.application.service.OpenChatRoomService;
+import com.jongho.openChat.application.facade.OpenChatRoomFacadeImpl;
+import com.jongho.openChat.application.service.OpenChatRoomServiceImpl;
 import com.jongho.openChat.presentation.controller.OpenChatRoomController;
-
+import java.util.Map;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
@@ -20,15 +27,6 @@ import org.springframework.context.annotation.FilterType;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
-import java.util.Map;
-
-import static org.mockito.Mockito.doNothing;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.patch;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-
 @WebMvcTest(
         value = OpenChatRoomController.class,
         excludeFilters = @ComponentScan.Filter(type = FilterType.ASSIGNABLE_TYPE, classes = {AuthInterceptor.class, WebMvcConfig.class})
@@ -36,9 +34,9 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @DisplayName("OpenChatRoomController 클래스")
 public class OpenChatRoomControllerTest {
     @MockBean
-    private OpenChatRoomFacade openChatRoomFacade;
+    private OpenChatRoomFacadeImpl openChatRoomFacade;
     @MockBean
-    private OpenChatRoomService openChatRoomService;
+    private OpenChatRoomServiceImpl openChatRoomService;
     @Autowired
     private MockMvc mockMvc;
 

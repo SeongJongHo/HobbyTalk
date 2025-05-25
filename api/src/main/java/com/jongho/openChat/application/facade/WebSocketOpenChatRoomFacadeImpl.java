@@ -2,33 +2,33 @@ package com.jongho.openChat.application.facade;
 
 import com.jongho.common.exception.OpenChatRoomNotFoundException;
 import com.jongho.common.util.date.DateUtil;
-import com.jongho.openChat.application.service.OpenChatRedisService;
-import com.jongho.openChat.application.service.OpenChatService;
-import com.jongho.openChat.domain.model.OpenChat;
 import com.jongho.openChat.application.dto.response.OpenChatRoomDto;
-import com.jongho.openChat.application.service.OpenChatRoomRedisService;
-import com.jongho.openChat.application.service.OpenChatRoomService;
+import com.jongho.openChat.application.service.OpenChatRedisServiceImpl;
+import com.jongho.openChat.application.service.OpenChatRoomRedisServiceImpl;
+import com.jongho.openChat.application.service.OpenChatRoomServiceImpl;
+import com.jongho.openChat.application.service.OpenChatRoomUserServiceImpl;
+import com.jongho.openChat.application.service.OpenChatServiceImpl;
+import com.jongho.openChat.domain.model.OpenChat;
+import com.jongho.openChat.domain.model.OpenChatRoomUser;
 import com.jongho.openChat.domain.model.redis.CachedOpenChatRoom;
 import com.jongho.openChat.domain.model.redis.CachedOpenChatRoomConnectionInfo;
-import com.jongho.openChat.application.service.OpenChatRoomUserService;
-import com.jongho.openChat.domain.model.OpenChatRoomUser;
-import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Service;
-
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
-public class WebSocketOpenChatRoomFacadeImpl implements WebSocketOpenChatRoomFacade{
-    private final OpenChatRoomRedisService openChatRoomRedisService;
-    private final OpenChatRoomService openChatRoomService;
-    private final OpenChatService openChatService;
-    private final OpenChatRedisService openChatRedisService;
-    private final OpenChatRoomUserService openChatRoomUserService;
+public class WebSocketOpenChatRoomFacadeImpl {
+
+    private final OpenChatRoomRedisServiceImpl openChatRoomRedisService;
+    private final OpenChatRoomServiceImpl openChatRoomService;
+    private final OpenChatServiceImpl openChatService;
+    private final OpenChatRedisServiceImpl openChatRedisService;
+    private final OpenChatRoomUserServiceImpl openChatRoomUserService;
 
     /**
      * 자신이 참여중인 채팅방 목록 반환
@@ -40,7 +40,7 @@ public class WebSocketOpenChatRoomFacadeImpl implements WebSocketOpenChatRoomFac
     public List<OpenChatRoomDto> getOpenChatRoomList(Long userId){
         List<Long> openChatRoomIdList = openChatRoomRedisService.getOpenChatRoomIdList(userId);
         List<OpenChatRoomDto> openChatRoomDtoList;
-        if (openChatRoomIdList.size() == 0){
+        if (openChatRoomIdList.isEmpty()) {
             List<CachedOpenChatRoom> openChatRoomList = openChatRoomService.getJoinOpenChatRoomList(userId);
             openChatRoomDtoList = enrichOpenChatRoomDtoListWithLastOpenChat(userId, openChatRoomList);
         }else{
@@ -126,7 +126,7 @@ public class WebSocketOpenChatRoomFacadeImpl implements WebSocketOpenChatRoomFac
      **/
     private List<Long> getOpenChatRoomUserList(CachedOpenChatRoom openChatRoom){
         List<Long> idList = openChatRoomRedisService.getOpenChatRoomIdList(openChatRoom.getId());
-        if (idList.size() == 0 || idList.size() != openChatRoom.getCurrentAttendance()){
+        if (idList.isEmpty() || idList.size() != openChatRoom.getCurrentAttendance()) {
             idList = openChatRoomService.getOpenChatRoomUserList(openChatRoom.getId());
             openChatRoomRedisService.createOpenChatRoomUserList(openChatRoom.getId(), idList);
         }

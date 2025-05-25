@@ -1,31 +1,36 @@
 package com.jongho.openChat.application.facade;
 
-import com.jongho.openChat.application.service.OpenChatRoomMembershipRequestService;
-import com.jongho.openChat.common.enums.MembershipRequestStatusEnum;
-import com.jongho.openChat.domain.model.OpenChatRoomMembershipRequest;
-import com.jongho.category.application.service.CategoryService;
+import com.jongho.category.application.service.CategoryServiceImpl;
 import com.jongho.category.domain.model.Category;
-import com.jongho.common.exception.*;
+import com.jongho.common.exception.AlreadyExistsException;
+import com.jongho.common.exception.CategoryNotFoundException;
+import com.jongho.common.exception.InvalidPasswordException;
+import com.jongho.common.exception.MaxChatRoomsExceededException;
+import com.jongho.common.exception.MaxChatRoomsJoinException;
+import com.jongho.common.exception.OpenChatRoomNotFoundException;
 import com.jongho.openChat.application.dto.request.OpenChatRoomCreateDto;
-import com.jongho.openChat.application.service.OpenChatRoomService;
+import com.jongho.openChat.application.service.OpenChatRoomMembershipRequestServiceImpl;
+import com.jongho.openChat.application.service.OpenChatRoomServiceImpl;
+import com.jongho.openChat.application.service.OpenChatRoomUserServiceImpl;
+import com.jongho.openChat.common.enums.MembershipRequestStatusEnum;
 import com.jongho.openChat.domain.model.OpenChatRoom;
-import com.jongho.openChat.application.service.OpenChatRoomUserService;
+import com.jongho.openChat.domain.model.OpenChatRoomMembershipRequest;
 import com.jongho.openChat.domain.model.OpenChatRoomUser;
+import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Optional;
-
 @Service
 @RequiredArgsConstructor
-public class OpenChatRoomFacadeImpl implements OpenChatRoomFacade {
-    private final OpenChatRoomService openChatRoomService;
-    private final OpenChatRoomUserService openChatRoomUserService;
-    private final OpenChatRoomMembershipRequestService openChatRoomMembershipRequestService;
-    private final CategoryService categoryService;
+public class OpenChatRoomFacadeImpl {
+
+    private final OpenChatRoomServiceImpl openChatRoomService;
+    private final OpenChatRoomUserServiceImpl openChatRoomUserService;
+    private final OpenChatRoomMembershipRequestServiceImpl openChatRoomMembershipRequestService;
+    private final CategoryServiceImpl categoryService;
     private final int MAXIMUM_OPEN_CHAT_ROOM_COUNT = 5;
-    @Override
+
     @Transactional
     public void createOpenChatRoomAndOpenChatRoomUser(Long authUserId, OpenChatRoomCreateDto openChatRoomCreateDto) {
         if(openChatRoomService.getOpenChatRoomCountByManagerId(authUserId) >= MAXIMUM_OPEN_CHAT_ROOM_COUNT){
@@ -51,7 +56,7 @@ public class OpenChatRoomFacadeImpl implements OpenChatRoomFacade {
         openChatRoomService.createOpenChatRoom(openChatRoom);
         openChatRoomUserService.createOpenChatRoomUser(new OpenChatRoomUser(openChatRoom.getId(), authUserId));
     }
-    @Override
+
     @Transactional
     public void joinOpenChatRoom(Long authUserId, Long openChatRoomId, String password) {
         OpenChatRoom openChatRoom = openChatRoomService.getOpenChatRoomByIdForUpdate(openChatRoomId)
@@ -71,7 +76,7 @@ public class OpenChatRoomFacadeImpl implements OpenChatRoomFacade {
         openChatRoomUserService.createOpenChatRoomUser(new OpenChatRoomUser(openChatRoomId, authUserId));
         openChatRoomService.incrementOpenChatRoomCurrentAttendance(openChatRoomId, openChatRoom.getCurrentAttendance());
     }
-    @Override
+
     @Transactional
     public void createOpenChatRoomMembershipRequest(Long authUserId, Long openChatRoomId, String message) {
         OpenChatRoom openChatRoom = openChatRoomService.getOpenChatRoomById(openChatRoomId)

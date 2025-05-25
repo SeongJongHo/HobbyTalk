@@ -8,14 +8,19 @@ import com.jongho.openChat.application.dto.request.OpenChatRoomCreateDto;
 import com.jongho.openChat.application.dto.request.OpenChatRoomJoinDto;
 import com.jongho.openChat.application.dto.request.OpenChatRoomMembershipRequestDto;
 import com.jongho.openChat.application.dto.request.OpenChatRoomNoticeUpdateDto;
-import com.jongho.openChat.application.facade.OpenChatRoomFacade;
-import com.jongho.openChat.application.service.OpenChatRoomService;
+import com.jongho.openChat.application.facade.OpenChatRoomFacadeImpl;
+import com.jongho.openChat.application.service.OpenChatRoomServiceImpl;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PatchMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 @Tag(name = "OpenChatRoom", description = "오픈채팅방 API")
 @RestController
@@ -23,8 +28,9 @@ import org.springframework.web.bind.annotation.*;
 @HttpRequestLogging
 @RequestMapping("/api/v1/open-chat-rooms")
 public class OpenChatRoomController {
-    private final OpenChatRoomFacade openChatRoomFacade;
-    private final OpenChatRoomService openChatRoomService;
+
+    private final OpenChatRoomFacadeImpl openChatRoomFacade;
+    private final OpenChatRoomServiceImpl openChatRoomService;
 
     @Operation(summary = "오픈채팅방 생성")
     @PostMapping

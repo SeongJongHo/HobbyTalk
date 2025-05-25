@@ -2,27 +2,26 @@ package com.jongho.user.application.facade;
 
 import com.jongho.common.exception.UnAuthorizedException;
 import com.jongho.common.util.bcrypt.BcryptUtil;
-import com.jongho.user.domain.model.AuthUser;
-import com.jongho.user.application.dto.response.TokenResponseDto;
-import com.jongho.user.application.service.AuthUserService;
-import com.jongho.user.application.service.UserService;
-import com.jongho.user.domain.model.User;
 import com.jongho.common.util.jwt.AccessPayload;
 import com.jongho.common.util.jwt.JwtUtil;
 import com.jongho.common.util.jwt.RefreshPayload;
+import com.jongho.user.application.dto.response.TokenResponseDto;
+import com.jongho.user.application.service.AuthUserServiceImpl;
+import com.jongho.user.application.service.UserServiceImpl;
+import com.jongho.user.domain.model.AuthUser;
+import com.jongho.user.domain.model.User;
+import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Optional;
-
 @Service
 @RequiredArgsConstructor
-public class AuthUserFacadeImpl implements AuthUserFacade {
-    private final UserService userService;
-    private final AuthUserService authUserService;
+public class AuthUserFacadeImpl {
+
+    private final UserServiceImpl userService;
+    private final AuthUserServiceImpl authUserService;
     private final JwtUtil jwtUtil;
-    @Override
     @Transactional
     public TokenResponseDto signIn(String username, String password) {
         User user = userService.getUser(username);
@@ -45,16 +44,15 @@ public class AuthUserFacadeImpl implements AuthUserFacade {
         return new TokenResponseDto(jwtUtil.createAccessToken(accessPayload), refreshToken);
     }
 
-    @Override
     @Transactional
     public TokenResponseDto tokenRefresh(String refreshToken) {
         RefreshPayload refreshPayload = jwtUtil.validateRefreshToken(refreshToken);
         Optional<AuthUser> authUser = authUserService.getAuthUser(refreshPayload.getUserId());
         if(authUser.isPresent()) {
             if(refreshToken.equals(authUser.get().getRefreshToken())) {
-                User user = userService.getUserById(refreshPayload.getUserId()).orElseThrow(()->{
-                    throw new UnAuthorizedException("존재하지 않는 유저입니다.");
-                });
+                User user = userService.getUserById(refreshPayload.getUserId())
+                    .orElseThrow(() -> new UnAuthorizedException(
+                        "존재하지 않는 유저입니다."));
 
                 String newRefreshToken = jwtUtil.createRefreshToken(refreshPayload);
                 authUserService.updateRefreshToken(new AuthUser(user.getId(), newRefreshToken));

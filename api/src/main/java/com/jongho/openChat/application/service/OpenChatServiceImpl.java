@@ -11,17 +11,14 @@ import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
-public class OpenChatServiceImpl implements OpenChatService{
+public class OpenChatServiceImpl {
     private final OpenChatRepository openChatRepository;
-    @Override
     public Optional<OpenChat> getLastOpenChatByOpenChatRoomId(Long openChatRoomId){
         return openChatRepository.selectLastOpenChatByChatRoomId(openChatRoomId);
     };
-    @Override
     public int getUnReadOpenChatCountByOpenChatRoomIdAndLastExitTime(Long openChatRoomId, String lastCreatedTime, int limit){
         return openChatRepository.selectUnReadOpenChatCountByChatRoomIdAndLastExitTime(openChatRoomId, lastCreatedTime, limit);
     }
-    @Override
     public List<OpenChatDto> getOpenChatByOpenChatRoomIdAndLastCreatedTime(Long openChatRoomId, String lastCreatedTime, int limit){
         return openChatRepository.selectOpenChatByChatRoomIdAndLastCreatedTime(openChatRoomId, lastCreatedTime, limit);
     }

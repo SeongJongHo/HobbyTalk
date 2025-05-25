@@ -1,34 +1,33 @@
 package com.jongho.openChat.application.facade;
 
+import static com.jongho.openChat.common.enums.ActiveTypeEnum.INACTIVE;
+
 import com.jongho.common.exception.OpenChatRoomNotFoundException;
 import com.jongho.openChat.application.dto.response.OpenChatDto;
-import com.jongho.openChat.application.service.OpenChatRedisService;
+import com.jongho.openChat.application.service.OpenChatRedisServiceImpl;
+import com.jongho.openChat.application.service.OpenChatRoomRedisServiceImpl;
+import com.jongho.openChat.application.service.OpenChatRoomServiceImpl;
 import com.jongho.openChat.domain.model.OpenChat;
-import com.jongho.openChat.application.service.OpenChatRoomRedisService;
-import com.jongho.openChat.application.service.OpenChatRoomService;
 import com.jongho.openChat.domain.model.redis.CachedOpenChatRoom;
 import com.jongho.openChat.domain.model.redis.CachedOpenChatRoomConnectionInfo;
+import java.util.List;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-
-import static com.jongho.openChat.common.enums.ActiveTypeEnum.INACTIVE;
-
 @Service
 @Log4j2
 @RequiredArgsConstructor
-public class SendWebSocketOpenChatFacadeImpl implements SendWebSocketOpenChatFacade{
-    private final OpenChatRedisService openChatRedisService;
-    private final OpenChatRoomRedisService openChatRoomRedisService;
-    private final OpenChatRoomService openChatRoomService;
+public class SendWebSocketOpenChatFacadeImpl {
+
+    private final OpenChatRedisServiceImpl openChatRedisService;
+    private final OpenChatRoomRedisServiceImpl openChatRoomRedisService;
+    private final OpenChatRoomServiceImpl openChatRoomService;
 
     /**
      * 채팅방에 채팅을 전송한다.
      * @param openChatDto 새로 생성된 채팅 정보
      */
-    @Override
     public void sendOpenChat(OpenChatDto openChatDto){
         OpenChat openChat = convertToOpenChat(openChatDto);
         openChatRedisService.createOpenChat(openChat);

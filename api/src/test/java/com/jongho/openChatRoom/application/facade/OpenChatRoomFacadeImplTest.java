@@ -1,15 +1,29 @@
 package com.jongho.openChatRoom.application.facade;
 
-import com.jongho.openChat.application.facade.OpenChatRoomFacadeImpl;
-import com.jongho.openChat.application.service.OpenChatRoomMembershipRequestService;
-import com.jongho.category.application.service.CategoryService;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.mockito.Mockito.any;
+import static org.mockito.Mockito.doNothing;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+
+import com.jongho.category.application.service.CategoryServiceImpl;
 import com.jongho.category.domain.model.Category;
-import com.jongho.common.exception.*;
+import com.jongho.common.exception.AlreadyExistsException;
+import com.jongho.common.exception.CategoryNotFoundException;
+import com.jongho.common.exception.InvalidPasswordException;
+import com.jongho.common.exception.MaxChatRoomsExceededException;
+import com.jongho.common.exception.MaxChatRoomsJoinException;
+import com.jongho.common.exception.OpenChatRoomNotFoundException;
 import com.jongho.openChat.application.dto.request.OpenChatRoomCreateDto;
-import com.jongho.openChat.application.service.OpenChatRoomService;
+import com.jongho.openChat.application.facade.OpenChatRoomFacadeImpl;
+import com.jongho.openChat.application.service.OpenChatRoomMembershipRequestServiceImpl;
+import com.jongho.openChat.application.service.OpenChatRoomServiceImpl;
+import com.jongho.openChat.application.service.OpenChatRoomUserServiceImpl;
 import com.jongho.openChat.domain.model.OpenChatRoom;
-import com.jongho.openChat.application.service.OpenChatRoomUserService;
 import com.jongho.openChat.domain.model.OpenChatRoomUser;
+import java.util.Optional;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
@@ -19,23 +33,17 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import java.util.Optional;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.mockito.Mockito.*;
-
 @ExtendWith(MockitoExtension.class)
 @DisplayName("OpenChatRoomFacadeImpl 클래스")
 public class OpenChatRoomFacadeImplTest {
     @Mock
-    private OpenChatRoomService openChatRoomService;
+    private OpenChatRoomServiceImpl openChatRoomService;
     @Mock
-    private OpenChatRoomUserService openChatRoomUserService;
+    private OpenChatRoomUserServiceImpl openChatRoomUserService;
     @Mock
-    private OpenChatRoomMembershipRequestService openChatRoomMembershipRequestService;
+    private OpenChatRoomMembershipRequestServiceImpl openChatRoomMembershipRequestService;
     @Mock
-    private CategoryService categoryService;
+    private CategoryServiceImpl categoryService;
     @InjectMocks
     private OpenChatRoomFacadeImpl openChatRoomFacadeImpl;
 

@@ -11,15 +11,13 @@ import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
-public class CategoryServiceImpl implements CategoryService {
+public class CategoryServiceImpl {
     private final CategoryRepository categoryRepository;
-    @Override
     public List<Category> getMainCategory() {
 
         return categoryRepository.selectMainCategory();
     }
 
-    @Override
     public List<Category> getSubCategory(Long parentId) {
         Optional<Category> mainCategory = categoryRepository.selectOneCategoryById(parentId);
 
@@ -30,7 +28,6 @@ public class CategoryServiceImpl implements CategoryService {
         return categoryRepository.selectSubCategory(parentId);
     }
 
-    @Override
     public Optional<Category> getOneCategoryById(Long categoryId) {
         return categoryRepository.selectOneCategoryById(categoryId);
     }

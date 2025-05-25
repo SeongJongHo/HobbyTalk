@@ -4,22 +4,21 @@ import com.jongho.common.exception.UserDuplicatedException;
 import com.jongho.common.exception.UserNotFoundException;
 import com.jongho.common.util.bcrypt.BcryptUtil;
 import com.jongho.user.application.dto.request.UserSignUpDto;
-import com.jongho.user.domain.model.User;
 import com.jongho.user.application.repository.UserRepository;
+import com.jongho.user.domain.model.User;
+import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Optional;
-
 @RequiredArgsConstructor
 @Service
-public class UserServiceImpl implements UserService {
+public class UserServiceImpl {
 
     private final UserRepository userRepository;
-    @Override
+
     @Transactional(propagation = Propagation.REQUIRES_NEW)
     public void signUp(UserSignUpDto userSignUpDto) {
         userRepository.findOneByUsername(userSignUpDto.username())
@@ -47,12 +46,11 @@ public class UserServiceImpl implements UserService {
         }
     }
 
-    @Override
     public User getUser(String username) {
         return userRepository.findOneByUsername(username)
                 .orElseThrow(() -> new UserNotFoundException("존재하지 않는 아이디입니다."));
     }
-    @Override
+
     public Optional<User> getUserById(Long id) {
         return userRepository.findOneById(id);
     }

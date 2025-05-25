@@ -7,8 +7,8 @@ import com.jongho.common.database.redis.RedisService;
 import com.jongho.common.util.websocket.BaseMessageTypeEnum;
 import com.jongho.common.util.websocket.BaseWebSocketMessage;
 import com.jongho.openChat.application.dto.response.OpenChatDto;
-import com.jongho.openChat.application.facade.SendWebSocketOpenChatFacade;
-import com.jongho.openChat.application.service.OpenChatRoomRedisService;
+import com.jongho.openChat.application.facade.SendWebSocketOpenChatFacadeImpl;
+import com.jongho.openChat.application.service.OpenChatRoomRedisServiceImpl;
 import java.io.IOException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
@@ -22,8 +22,9 @@ import org.springframework.web.socket.handler.TextWebSocketHandler;
 @Log4j2
 @RequiredArgsConstructor
 public class WebSocketOpenChatHandler extends TextWebSocketHandler {
-    private final SendWebSocketOpenChatFacade sendWebSocketOpenChatFacade;
-    private final OpenChatRoomRedisService openChatRoomRedisService;
+
+    private final SendWebSocketOpenChatFacadeImpl sendWebSocketOpenChatFacade;
+    private final OpenChatRoomRedisServiceImpl openChatRoomRedisService;
     private final RedisService redisService;
     private final String OPEN_CHAT_ROOM_CHANNEL = "openChatRoom:";
 

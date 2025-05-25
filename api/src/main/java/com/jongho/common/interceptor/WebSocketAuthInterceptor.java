@@ -5,13 +5,15 @@ import com.jongho.common.exception.UnAuthorizedException;
 import com.jongho.common.response.BaseResponseEntity;
 import com.jongho.common.util.jwt.AccessPayload;
 import com.jongho.common.util.jwt.JwtUtil;
-import com.jongho.common.util.threadlocal.AuthenticatedUserThreadLocalManager;
-import com.jongho.user.application.service.AuthUserService;
-import com.jongho.user.application.service.UserService;
+import com.jongho.user.application.service.AuthUserServiceImpl;
+import com.jongho.user.application.service.UserServiceImpl;
 import com.jongho.user.domain.model.AuthUser;
 import com.jongho.user.domain.model.User;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.Map;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.server.ServerHttpRequest;
@@ -22,16 +24,12 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.socket.WebSocketHandler;
 import org.springframework.web.socket.server.HandshakeInterceptor;
 
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.Map;
-
 @Component
 @RequiredArgsConstructor
 public class WebSocketAuthInterceptor implements HandshakeInterceptor {
     private final JwtUtil jwtUtil;
-    private final AuthUserService authUserService;
-    private final UserService userService;
+    private final AuthUserServiceImpl authUserService;
+    private final UserServiceImpl userService;
 
     @Override
     public boolean beforeHandshake(ServerHttpRequest request, ServerHttpResponse response,

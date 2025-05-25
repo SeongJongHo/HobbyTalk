@@ -2,11 +2,11 @@ package com.jongho.openChat.application.facade;
 
 import com.jongho.common.util.date.DateUtil;
 import com.jongho.openChat.application.dto.response.OpenChatDto;
-import com.jongho.openChat.application.service.OpenChatRedisService;
-import com.jongho.openChat.application.service.OpenChatService;
+import com.jongho.openChat.application.service.OpenChatRedisServiceImpl;
+import com.jongho.openChat.application.service.OpenChatServiceImpl;
 import com.jongho.openChat.domain.model.OpenChat;
-import com.jongho.user.application.service.UserRedisService;
-import com.jongho.user.application.service.UserService;
+import com.jongho.user.application.service.UserRedisServiceImpl;
+import com.jongho.user.application.service.UserServiceImpl;
 import com.jongho.user.domain.model.User;
 import com.jongho.user.domain.model.redis.CachedUserProfile;
 import lombok.RequiredArgsConstructor;
@@ -20,11 +20,11 @@ import java.util.stream.Stream;
 @Service
 @Log4j2
 @RequiredArgsConstructor
-public class ReadWebSocketOpenChatFacadeImpl implements ReadWebSocketOpenChatFacade {
-    private final OpenChatService openChatService;
-    private final OpenChatRedisService openChatRedisService;
-    private final UserRedisService userRedisService;
-    private final UserService userService;
+public class ReadWebSocketOpenChatFacadeImpl {
+    private final OpenChatServiceImpl openChatService;
+    private final OpenChatRedisServiceImpl openChatRedisService;
+    private final UserRedisServiceImpl userRedisService;
+    private final UserServiceImpl userService;
     private final int limit = 100;
 
     /**
@@ -32,10 +32,9 @@ public class ReadWebSocketOpenChatFacadeImpl implements ReadWebSocketOpenChatFac
      * @param openChatRoomId 채팅방 아이디
      * @return 채팅 목록
      */
-    @Override
     public List<OpenChatDto> getInitialOpenChatList(Long openChatRoomId){
         List<OpenChat> openChatList = openChatRedisService.getOpenChatListByOpenChatRoomIdAndOffsetAndLimit(openChatRoomId, 0, limit-1);
-        if(openChatList.size() == 0){
+        if(openChatList.isEmpty()){
             return openChatService.getOpenChatByOpenChatRoomIdAndLastCreatedTime(openChatRoomId, DateUtil.now(), limit);
         }
         List<OpenChatDto> openChatDtoList = getOpenChatDtoList(openChatList);
@@ -57,10 +56,9 @@ public class ReadWebSocketOpenChatFacadeImpl implements ReadWebSocketOpenChatFac
      * @param lastCreatedTime 마지막 생성 시간
      * @return 채팅 목록
      */
-    @Override
     public List<OpenChatDto> getOpenChatListByOpenChatRoomIdAndLastCreatedTime(Long openChatRoomId, String lastCreatedTime){
         List<OpenChat> openChatList = openChatRedisService.getOpenChatListByOpenChatRoomId(openChatRoomId);
-        if(openChatList.size() == 0){
+        if(openChatList.isEmpty()){
             return openChatService.getOpenChatByOpenChatRoomIdAndLastCreatedTime(openChatRoomId, lastCreatedTime, limit);
         }
         List<OpenChatDto> openChatDtoList = filterOpenChatsByCreatedTime(openChatList, lastCreatedTime);

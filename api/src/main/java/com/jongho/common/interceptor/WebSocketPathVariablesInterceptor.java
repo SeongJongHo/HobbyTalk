@@ -2,11 +2,15 @@ package com.jongho.common.interceptor;
 
 import com.google.gson.Gson;
 import com.jongho.common.response.BaseResponseEntity;
-import com.jongho.openChat.application.service.OpenChatRoomService;
+import com.jongho.openChat.application.service.OpenChatRoomServiceImpl;
+import com.jongho.openChat.application.service.OpenChatRoomUserServiceImpl;
 import com.jongho.openChat.domain.model.OpenChatRoom;
-import com.jongho.openChat.application.service.OpenChatRoomUserService;
 import com.jongho.openChat.domain.model.OpenChatRoomUser;
 import jakarta.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.Map;
+import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.http.HttpStatus;
@@ -18,17 +22,13 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.socket.WebSocketHandler;
 import org.springframework.web.socket.server.HandshakeInterceptor;
 
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.Map;
-import java.util.Optional;
-
 @Component
 @Log4j2
 @RequiredArgsConstructor
 public class WebSocketPathVariablesInterceptor implements HandshakeInterceptor {
-    private final OpenChatRoomService openChatRoomService;
-    private final OpenChatRoomUserService openChatRoomUserService;
+
+    private final OpenChatRoomServiceImpl openChatRoomService;
+    private final OpenChatRoomUserServiceImpl openChatRoomUserService;
 
     /**
      * WebSocket 연결 전에

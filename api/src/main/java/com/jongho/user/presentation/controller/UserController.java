@@ -6,17 +6,19 @@ import com.jongho.user.application.dto.request.TokenRefreshDto;
 import com.jongho.user.application.dto.request.UserSignInDto;
 import com.jongho.user.application.dto.request.UserSignUpDto;
 import com.jongho.user.application.dto.response.TokenResponseDto;
-import com.jongho.user.application.facade.AuthUserFacade;
-import com.jongho.user.application.facade.UserFacade;
-import com.jongho.user.application.service.UserService;
-
+import com.jongho.user.application.facade.AuthUserFacadeImpl;
+import com.jongho.user.application.facade.UserFacadeImpl;
+import com.jongho.user.application.service.UserServiceImpl;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
-import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.*;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 @Tag(name = "User", description = "유저 API")
 @HttpRequestLogging
@@ -24,9 +26,10 @@ import org.springframework.http.ResponseEntity;
 @RequestMapping("/api/v1/users")
 @RequiredArgsConstructor
 public class UserController {
-    private final UserService userService;
-    private final UserFacade userFacade;
-    private final AuthUserFacade authUserFacade;
+
+    private final UserServiceImpl userService;
+    private final UserFacadeImpl userFacade;
+    private final AuthUserFacadeImpl authUserFacade;
 
     @Operation(summary = "회원가입")
     @PostMapping("/sign-up")
