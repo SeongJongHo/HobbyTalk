@@ -11,6 +11,7 @@ public class OpenChat {
     private final Long id;
     private final Long senderId;
     private final Long openChatRoomId;
+    private final Long SnowflakeId;
     private final String message;
     private final int type;
     private final int isDeleted;
@@ -22,6 +23,7 @@ public class OpenChat {
             @JsonProperty("id") Long id,
             @JsonProperty("senderId") Long senderId,
             @JsonProperty("openChatRoomId") Long openChatRoomId,
+            @JsonProperty("snowflakeId") Long snowflakeId,
             @JsonProperty("message") String message,
             @JsonProperty("type") int type,
             @JsonProperty("isDeleted") int isDeleted,
@@ -30,6 +32,7 @@ public class OpenChat {
         this.id = id;
         this.senderId = senderId;
         this.openChatRoomId = openChatRoomId;
+        this.SnowflakeId = snowflakeId;
         this.message = message;
         this.type = type;
         this.isDeleted = isDeleted;

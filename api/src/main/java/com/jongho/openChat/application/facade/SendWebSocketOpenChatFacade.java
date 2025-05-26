@@ -2,7 +2,9 @@ package com.jongho.openChat.application.facade;
 
 import static com.jongho.openChat.common.enums.ActiveTypeEnum.INACTIVE;
 
+import com.jongho.common.annotaition.RedisMultiExec;
 import com.jongho.common.exception.OpenChatRoomNotFoundException;
+import com.jongho.common.util.snowflake.Snowflake;
 import com.jongho.openChat.application.dto.response.OpenChatDto;
 import com.jongho.openChat.application.service.OpenChatRedisService;
 import com.jongho.openChat.application.service.OpenChatRoomRedisService;
@@ -23,11 +25,12 @@ public class SendWebSocketOpenChatFacade {
     private final OpenChatRedisService openChatRedisService;
     private final OpenChatRoomRedisService openChatRoomRedisService;
     private final OpenChatRoomService openChatRoomService;
-
+    private final Snowflake snowflake;
     /**
      * 채팅방에 채팅을 전송한다.
      * @param openChatDto 새로 생성된 채팅 정보
      */
+    @RedisMultiExec
     public void sendOpenChat(OpenChatDto openChatDto){
         OpenChat openChat = convertToOpenChat(openChatDto);
         openChatRedisService.createOpenChat(openChat);
@@ -102,6 +105,7 @@ public class SendWebSocketOpenChatFacade {
                 openChatDto.getId(),
                 openChatDto.getSenderProfile().getId(),
                 openChatDto.getOpenChatRoomId(),
+                snowflake.nextId(),
                 openChatDto.getMessage(),
                 openChatDto.getType(),
                 openChatDto.getIsDeleted(),

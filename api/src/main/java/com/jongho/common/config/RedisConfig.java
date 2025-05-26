@@ -16,12 +16,15 @@ public class RedisConfig {
     private String redisHost;
     @Value("${spring.redis.port}")
     private int redisPort;
+    @Value("${spring.redis.password:}")
+    private String redisPassword;
 
     @Bean
     public RedisMessageListenerContainer redisMessageListener(
             RedisConnectionFactory connectionFactory) {
         RedisMessageListenerContainer container = new RedisMessageListenerContainer();
         container.setConnectionFactory(connectionFactory);
+
 
         return container;
     }
@@ -30,6 +33,9 @@ public class RedisConfig {
     public RedisConnectionFactory redisConnectionFactory() {
         RedisStandaloneConfiguration configuration = new RedisStandaloneConfiguration(redisHost,
             redisPort);
+        if (!redisPassword.isEmpty()) {
+            configuration.setPassword(redisPassword);
+        }
         return new LettuceConnectionFactory(configuration);
     }
 
