@@ -13,6 +13,7 @@ import org.springframework.batch.core.StepExecution;
 import org.springframework.batch.core.StepExecutionListener;
 import org.springframework.batch.item.Chunk;
 import org.springframework.batch.item.ItemWriter;
+import org.springframework.data.redis.connection.RedisConnection;
 import org.springframework.stereotype.Component;
 
 @Slf4j
@@ -21,23 +22,26 @@ import org.springframework.stereotype.Component;
 public class OpenChatBatchWriter implements ItemWriter<List<String>>, StepExecutionListener {
 
     private final BaseRedisTemplate baseRedisTemplate;
-    private static int COUNT = 0;
     @Override
     public void write(@NotNull Chunk<? extends List<String>> chunk) {
         chunk.forEach(chatRoomIds -> {
             baseRedisTemplate.pipeline(connection -> {
-                chatRoomIds.forEach(chatRoomId -> {
-                    connection.keyCommands().rename(
-                        RedisKeyGeneration.getChatBatchKey(Long.parseLong(chatRoomId))
-                            .getBytes(StandardCharsets.UTF_8),
-                        RedisKeyGeneration.getChatBatchProcessingKey(Long.parseLong(chatRoomId))
-                            .getBytes(StandardCharsets.UTF_8));
-                });
+                chatRoomIds.forEach(chatRoomId -> rename(connection, chatRoomId));
+
                 return null;
             });
         });
-        COUNT += 10000;
-        log.info("OpenChatBatchWriter write count: {}", COUNT);
+    }
+
+    private void rename(RedisConnection connection, String chatRoomId) {
+        byte[] chatBatchKey = RedisKeyGeneration.getChatBatchKey(Long.parseLong(chatRoomId))
+            .getBytes(StandardCharsets.UTF_8);
+        byte[] chatBatchProcessingKey = RedisKeyGeneration.getChatBatchProcessingKey(
+                Long.parseLong(chatRoomId))
+            .getBytes(StandardCharsets.UTF_8);
+        if (Boolean.TRUE.equals(connection.keyCommands().exists(chatBatchKey))) {
+            connection.keyCommands().rename(chatBatchKey, chatBatchProcessingKey);
+        }
     }
 
     @Override

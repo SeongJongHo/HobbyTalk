@@ -20,18 +20,6 @@ public class OpenChatBatchReader implements ItemReader<List<String>>, StepExecut
     private final static int BATCH_SIZE = 10000;
 
     @Override
-    public void beforeStep(@NotNull StepExecution stepExecution) {
-        stringRedisTemplate.rename(
-            RedisKeyGeneration.getChatGroupKey(),
-            RedisKeyGeneration.getChatGroupProcessingKey()
-        );
-        stringRedisTemplate.rename(
-            RedisKeyGeneration.getChatGroupMessageKey(),
-            RedisKeyGeneration.getChatGroupMessageProcessingKey()
-        );
-    }
-
-    @Override
     public List<String> read() {
          List<String> ids = stringRedisTemplate.rPopList(RedisKeyGeneration.getChatGroupProcessingKey(), String.class,
             BATCH_SIZE);

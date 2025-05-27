@@ -26,6 +26,13 @@ public class OpenChatBatchGroupMessageRepository implements IOpenChatBatchGroupM
     public void rename() {
         baseRedisTemplate.rename(
             RedisKeyGeneration.getChatGroupMessageKey(),
+            RedisKeyGeneration.getChatGroupMessageProcessingKey()
+        );
+    }
+
+    @Override
+    public boolean hasKey() {
+        return baseRedisTemplate.hasKey(
             RedisKeyGeneration.getChatGroupMessageKey()
         );
     }

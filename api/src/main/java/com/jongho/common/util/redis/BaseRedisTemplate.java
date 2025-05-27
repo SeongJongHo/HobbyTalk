@@ -197,6 +197,10 @@ public class BaseRedisTemplate  {
         return DataSerializer.deserialize(map, valueType);
     }
 
+    public boolean hasKey(String key) {
+        return Boolean.TRUE.equals(stringRedisTemplate.hasKey(key));
+    }
+
     public String toJson(Object value) {
         return DataSerializer.serialize(value);
     }

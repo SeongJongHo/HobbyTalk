@@ -31,6 +31,13 @@ public class OpenChatBatchGroupRepository implements IOpenChatBatchGroupReposito
     }
 
     @Override
+    public boolean hasKey() {
+        return baseRedisTemplate.hasKey(
+            RedisKeyGeneration.getChatGroupKey()
+        );
+    }
+
+    @Override
     public List<Long> rPopProcessing(int count) {
         return baseRedisTemplate.rPopList(
             RedisKeyGeneration.getChatGroupProcessingKey(),
