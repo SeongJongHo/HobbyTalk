@@ -16,10 +16,9 @@ public class ChatBatchScheduler {
     @Scheduled(fixedRate = 300000)
     public void execute() {
         Duration startTime = Duration.ofMillis(System.currentTimeMillis());
-        log.info("OpenChat Batch Scheduler started");
+        log.info("OpenChat Batch Scheduler started: {}", startTime.toMillis());
         try {
             openChatBatchService.execute();
-            log.info("OpenChat Batch Scheduler completed successfully");
         } catch (Exception e) {
             log.error("Error occurred during OpenChat Batch execution", e);
         }
