@@ -87,11 +87,13 @@ CREATE TABLE IF NOT EXISTS open_chats (
   id int PRIMARY KEY AUTO_INCREMENT,
   sender_id int NOT NULL COMMENT '전송자 id',
   open_chat_room_id int NOT NULL COMMENT '오픈채팅방 id',
+  snowflake_id varchar(255) NOT NULL COMMENT '스노우플레이크 아이디',
   message varchar(255) NOT NULL COMMENT '메세지 본문',
   type int NOT NULL COMMENT '채팅 타입',
   is_deleted int NOT NULL DEFAULT 0 COMMENT '삭제 여부',
   deleted_time timestamp NULL COMMENT '삭제 날짜',
-  created_time timestamp NOT NULL DEFAULT NOW() COMMENT '생성 날짜'
+  created_time timestamp NOT NULL DEFAULT NOW() COMMENT '생성 날짜',
+  UNIQUE KEY uq_snowflake_id (snowflake_id)
 );
 
 CREATE TABLE IF NOT EXISTS open_chat_room_membership_requests (
