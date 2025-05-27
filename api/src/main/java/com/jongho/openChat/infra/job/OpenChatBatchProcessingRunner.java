@@ -1,5 +1,6 @@
 package com.jongho.openChat.infra.job;
 
+import com.jongho.openChat.application.repository.IOpenChatBatchProcessingRunner;
 import com.jongho.openChat.domain.model.OpenChat;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
@@ -18,7 +19,7 @@ import org.springframework.transaction.PlatformTransactionManager;
 @Slf4j
 @Component
 @RequiredArgsConstructor
-public class OpenChatBatchProcessingRunner {
+public class OpenChatBatchProcessingRunner implements IOpenChatBatchProcessingRunner {
 
     private final OpenChatBatchProcessingReader openChatBatchProcessingReader;
     private final OpenChatBatchProcessingWriter openChatBatchProcessingWriter;
@@ -38,7 +39,7 @@ public class OpenChatBatchProcessingRunner {
         }
     }
 
-    public Job chatBatchProcJob() {
+    private Job chatBatchProcJob() {
         return new JobBuilder("chatBatchProcJob", jobRepository)
             .start(chatBatchProcStep())
             .build();
