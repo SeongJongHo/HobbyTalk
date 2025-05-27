@@ -10,4 +10,5 @@ public interface IOpenChatRepository {
     Optional<OpenChat> selectLastOpenChatByChatRoomId(Long openChatRoomId);
     int selectUnReadOpenChatCountByChatRoomIdAndLastExitTime(Long openChatRoomId, String lastExitTime, int limit);
     List<OpenChatDto> selectOpenChatByChatRoomIdAndLastCreatedTime(Long openChatRoomId, String lastCreatedTime, int limit);
+    void insertBatch(List<OpenChat> openChats);
 }

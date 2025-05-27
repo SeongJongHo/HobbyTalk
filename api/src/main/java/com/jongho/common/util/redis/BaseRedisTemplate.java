@@ -9,6 +9,7 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.redis.connection.MessageListener;
 import org.springframework.data.redis.core.Cursor;
 import org.springframework.data.redis.core.RedisCallback;
@@ -16,6 +17,7 @@ import org.springframework.data.redis.core.ScanOptions;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Component;
 
+@Slf4j
 @Component
 @RequiredArgsConstructor
 public class BaseRedisTemplate  {
@@ -33,6 +35,12 @@ public class BaseRedisTemplate  {
         String jsonValue = stringRedisTemplate.opsForValue().get(key);
 
         return jsonValue == null? null: toObject(jsonValue, valueType);
+    }
+
+    public <T> List<T> mGet(List<String> key, Class<T> valueType) {
+        List<String> jsonList = stringRedisTemplate.opsForValue().multiGet(key);
+
+        return jsonList == null ? null : mappingToElement(jsonList, valueType);
     }
 
     public <T> List<T> lPopList(String key, Class<T> valueType, int limit) {
@@ -181,6 +189,7 @@ public class BaseRedisTemplate  {
     }
 
     public <T> T toObject(String json, Class<T> valueType) {
+
         return DataSerializer.deserialize(json, valueType);
     }
 
@@ -196,7 +205,8 @@ public class BaseRedisTemplate  {
         stringRedisTemplate.executePipelined(callback);
     }
     private <T> List<T> mappingToElement(Collection<String> jsonList, Class<T> valueType){
-        return jsonList.stream().map(json -> toObject(json, valueType)).collect(Collectors.toList());
+        return jsonList.stream().filter(json -> json != null && !json.isEmpty())
+            .map(json -> toObject(json, valueType)).collect(Collectors.toList());
     }
 
     private boolean isEmpty(String key) {

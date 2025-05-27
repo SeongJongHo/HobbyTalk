@@ -28,4 +28,8 @@ public class OpenChatRepository implements IOpenChatRepository {
         return openChatMapper.selectOpenChatByChatRoomIdAndLastCreatedTime(openChatRoomId, lastCreatedTime, limit);
     }
 
+    @Override
+    public void insertBatch(List<OpenChat> openChats) {
+        openChatMapper.insertBatch(openChats);
+    }
 }

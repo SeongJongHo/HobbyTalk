@@ -48,6 +48,7 @@
     <insert id="insertBatch" parameterType="list">
         INSERT INTO open_chats (
         open_chat_room_id,
+        snowflake_id,
         sender_id,
         message,
         type,
@@ -55,9 +56,10 @@
         deleted_time,
         created_time
         ) VALUES
-        <foreach collection="list" item="com.jongho.openChat.domain.model.OpenChat" separator=",">
+        <foreach collection="openChats" item="chat" separator=",">
             (
             #{chat.openChatRoomId},
+            #{chat.snowflakeId},
             #{chat.senderId},
             #{chat.message},
             #{chat.type},

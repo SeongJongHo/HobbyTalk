@@ -43,8 +43,7 @@ public class OpenChatCacheRepository implements IOpenChatRedisRepository {
     @Override
     public void save(OpenChat openChat) {
         baseRedisTemplate.set(
-            RedisKeyGeneration.getChatMessageKey(openChat.getOpenChatRoomId(),
-                openChat.getSnowflakeId()),
+            RedisKeyGeneration.getChatMessageKey(openChat.getSnowflakeId()),
             openChat, CacheDuration.BATCH.getDuration());
         saveCache(openChat.getOpenChatRoomId(),
             openChat.getSnowflakeId(), CacheDuration.BATCH.getDuration());

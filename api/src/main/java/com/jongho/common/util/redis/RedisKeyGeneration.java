@@ -26,12 +26,11 @@ public class RedisKeyGeneration {
 
     /**
      * 단일 채팅 메시지 키 생성
-     * @param openChatRoomId 오픈 채팅방 ID
      * @param chatId 채팅 ID
      * @return 채팅 메시지 키
      */
-    public static String getChatMessageKey(Long openChatRoomId, Long chatId) {
-        return "chatRooms:" + openChatRoomId + ":chats:" + chatId;
+    public static String getChatMessageKey(Long chatId) {
+        return "chatRooms:chats:" + chatId;
     }
 
     /**
