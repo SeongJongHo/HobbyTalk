@@ -1,5 +1,6 @@
 package com.jongho.openChat.application.service;
 
+import com.jongho.openChat.application.repository.IOpenChatBatchGroupMessageRepository;
 import com.jongho.openChat.application.repository.IOpenChatBatchRepository;
 import com.jongho.openChat.application.repository.IOpenChatBatchGroupRepository;
 import com.jongho.openChat.common.enums.CacheSize;
@@ -17,6 +18,7 @@ public class OpenChatRedisService {
     private final IOpenChatRedisRepository iOpenChatRedisRepository;
     private final IOpenChatBatchGroupRepository iOpenChatBatchGroupRepository;
     private final IOpenChatBatchRepository iOpenChatBatchRepository;
+    private final IOpenChatBatchGroupMessageRepository iOpenChatBatchGroupMessageRepository;
 
     public Optional<OpenChat> getLastOpenChatByOpenChatRoomId(Long openChatRoomId){
         return iOpenChatRedisRepository.selectLastOpenChatByChatRoomId(openChatRoomId);
@@ -35,7 +37,8 @@ public class OpenChatRedisService {
         if(iOpenChatRedisRepository.getSize(openChat.getOpenChatRoomId()) > CacheSize.CHAT.getSize()) {
             iOpenChatRedisRepository.trimCacheToSize(openChat.getOpenChatRoomId());
         }
-        iOpenChatBatchGroupRepository.save(openChat.getSnowflakeId());
+        iOpenChatBatchGroupRepository.save(openChat.getOpenChatRoomId());
+        iOpenChatBatchGroupMessageRepository.save(openChat.getSnowflakeId());
         iOpenChatBatchRepository.save(openChat.getOpenChatRoomId(), openChat.getSnowflakeId());
 
     }

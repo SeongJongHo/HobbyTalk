@@ -1,43 +1,30 @@
 package com.jongho.openChat.presentation.scheduler;
 
-import com.jongho.common.lock.redis.RedisKey;
-import com.jongho.common.lock.service.LockService;
+import com.jongho.openChat.application.service.OpenChatBatchService;
+import java.time.Duration;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.log4j.Log4j2;
-import org.springframework.batch.core.Job;
-import org.springframework.batch.core.JobParametersBuilder;
-import org.springframework.batch.core.JobParametersInvalidException;
-import org.springframework.batch.core.launch.JobLauncher;
-import org.springframework.batch.core.repository.JobExecutionAlreadyRunningException;
-import org.springframework.batch.core.repository.JobInstanceAlreadyCompleteException;
-import org.springframework.batch.core.repository.JobRestartException;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
+@Slf4j
 @Component
 @RequiredArgsConstructor
-@Log4j2
 public class ChatBatchScheduler {
-    private final JobLauncher jobLauncher;
-    private final Job chatMessageJob;
-    private final LockService lockService;
+    private final OpenChatBatchService openChatBatchService;
 
     @Scheduled(fixedRate = 300000)
     public void execute() {
-        if(lockService.acquireLock(RedisKey.BATCH)){
-            try {
-                runBatchJob();
-            } catch (Exception e) {
-                log.error(e.getMessage());
-            } finally {
-                lockService.releaseLock(RedisKey.BATCH);
-            }
+        Duration startTime = Duration.ofMillis(System.currentTimeMillis());
+        log.info("OpenChat Batch Scheduler started");
+        try {
+            openChatBatchService.execute();
+            log.info("OpenChat Batch Scheduler completed successfully");
+        } catch (Exception e) {
+            log.error("Error occurred during OpenChat Batch execution", e);
         }
-    }
 
-    public void runBatchJob() throws JobInstanceAlreadyCompleteException, JobExecutionAlreadyRunningException, JobParametersInvalidException, JobRestartException {
-        jobLauncher.run(chatMessageJob, new JobParametersBuilder()
-                .addLong("timestamp", System.currentTimeMillis())
-                .toJobParameters());
+        Duration endTime = Duration.ofMillis(System.currentTimeMillis());
+        log.info("OpenChat Batch Scheduler execution time: {} ms", endTime.minus(startTime).toMillis());
     }
 }

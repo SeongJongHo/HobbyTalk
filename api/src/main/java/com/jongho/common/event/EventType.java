@@ -9,7 +9,7 @@ import lombok.extern.slf4j.Slf4j;
 @Getter
 @RequiredArgsConstructor
 public enum EventType {
-    EMAIL_VERIFY(Topic.CHAT_BATCH, ChatBatchData.class);
+    CHAT_BATCH(Topic.CHAT_BATCH, ChatBatchData.class);
 
     private final String topic;
     private final Class<? extends EventData> dataClass;
