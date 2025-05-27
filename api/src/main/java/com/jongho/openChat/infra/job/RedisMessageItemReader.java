@@ -1,4 +1,4 @@
-package com.jongho.openChat.infra.step;
+package com.jongho.openChat.infra.job;
 
 import com.jongho.common.util.redis.BaseRedisTemplate;
 import com.jongho.openChat.domain.model.OpenChat;
@@ -79,7 +79,7 @@ public class RedisMessageItemReader implements ItemReader<List<OpenChat>> {
     private List<OpenChat> processCurrentKey() {
         List<OpenChat> openChats = new ArrayList<>();
         if (currentKey != null) {
-            List<OpenChat> batch = redisTemplate.popList("chatRooms:" + currentKey + ":chats", OpenChat.class, 100);
+            List<OpenChat> batch = redisTemplate.lPopList("chatRooms:" + currentKey + ":chats", OpenChat.class, 100);
             if (batch != null && !batch.isEmpty()) {
                 openChats.addAll(batch);
             }

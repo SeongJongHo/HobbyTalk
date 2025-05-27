@@ -1,4 +1,4 @@
-package com.jongho.openChat.infra.step;
+package com.jongho.openChat.infra.job;
 
 import com.jongho.openChat.infra.mapper.OpenChatMapper;
 import com.jongho.openChat.domain.model.OpenChat;
