@@ -11,6 +11,7 @@ import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.redis.connection.MessageListener;
 import org.springframework.data.redis.core.Cursor;
+import org.springframework.data.redis.core.RedisCallback;
 import org.springframework.data.redis.core.ScanOptions;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Component;
@@ -165,6 +166,10 @@ public class BaseRedisTemplate  {
         stringRedisTemplate.convertAndSend(channel, message);
     }
 
+    public void streamPublish(String channel, String message) {
+        stringRedisTemplate.opsForStream().add(channel, Collections.singletonMap("data", message));
+    }
+
     public void subscribe(String channel, MessageListener messageListener) {
         Objects.requireNonNull(stringRedisTemplate.getConnectionFactory()).getConnection().subscribe(messageListener, channel.getBytes());
     }
@@ -187,6 +192,9 @@ public class BaseRedisTemplate  {
         return DataSerializer.serialize(value);
     }
 
+    public void pipeline(RedisCallback<?> callback) {
+        stringRedisTemplate.executePipelined(callback);
+    }
     private <T> List<T> mappingToElement(Collection<String> jsonList, Class<T> valueType){
         return jsonList.stream().map(json -> toObject(json, valueType)).collect(Collectors.toList());
     }
