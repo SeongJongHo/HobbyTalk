@@ -18,7 +18,8 @@ public class WebMvcConfig implements WebMvcConfigurer {
                 .excludePathPatterns(
                         "/api/v1/users/sign-in",
                         "/api/v1/users/sign-up",
-                        "/api/v1/users/token-refresh"
+                        "/api/v1/users/token-refresh",
+                        "/api/**/public/**"
                 );
     }
 }

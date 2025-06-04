@@ -7,6 +7,7 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public enum CacheSize {
     CHAT(1000),
+    CHAT_ROOM(1000),
     CHAT_BATCH(2000);
 
     private final int size;

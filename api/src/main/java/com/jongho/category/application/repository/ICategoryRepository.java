@@ -8,5 +8,6 @@ import java.util.Optional;
 public interface ICategoryRepository {
     List<Category> selectMainCategory();
     List<Category> selectSubCategory(Long parentId);
-    Optional<Category> selectOneCategoryById(Long categoryId);
+    Category selectOneCategoryById(Long categoryId);
+    List<Long> selectCategoryIds();
 }

@@ -42,7 +42,8 @@ public class DataSourceConfig {
     @Bean
     public ResourceDatabasePopulator databasePopulator() {
         ResourceDatabasePopulator populator = new ResourceDatabasePopulator();
-        populator.addScript(new ClassPathResource("schema.sql")); // 초기화 스키마 파일
+        populator.addScript(new ClassPathResource("schema.sql"));
+        populator.addScript(new ClassPathResource("category.sql"));
         return populator;
     }
 }

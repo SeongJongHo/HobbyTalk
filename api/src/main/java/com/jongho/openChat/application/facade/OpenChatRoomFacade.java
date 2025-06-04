@@ -36,8 +36,8 @@ public class OpenChatRoomFacade {
         if(openChatRoomService.getOpenChatRoomCountByManagerId(authUserId) >= MAXIMUM_OPEN_CHAT_ROOM_COUNT){
             throw new MaxChatRoomsExceededException("최대 개설 가능한 채팅방 개수를 초과하였습니다.");
         }
-        Optional<Category> category = categoryService.getOneCategoryById(openChatRoomCreateDto.getCategoryId());
-        if(category.isEmpty()){
+        Category category = categoryService.getOneCategoryById(openChatRoomCreateDto.getCategoryId());
+        if(category == null) {
             throw new CategoryNotFoundException("존재하지 않는 카테고리입니다.");
         }
         Optional<OpenChatRoom> openChatRoomByManagerIdAndTitle = openChatRoomService.getOpenChatRoomByManagerIdAndTitle(authUserId, openChatRoomCreateDto.getTitle());
