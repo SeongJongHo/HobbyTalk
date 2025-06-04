@@ -39,8 +39,7 @@ public class OpenChatBatchService {
             return true;
         }
 
-        throw new IllegalStateException(
-            "Chat batch is not running. Please check the batch configuration.");
+        return false;
     }
 
     private void chatBatchRename() {
