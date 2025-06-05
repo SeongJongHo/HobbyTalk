@@ -17,6 +17,7 @@ public class CustomCacheListManager implements ICustomCacheManager {
     private final BaseRedisTemplate redisTemplate;
     private final CustomCacheLockRepository customCacheLockProvider;
     private static final String DELIMITER = ":";
+    private static final String METADATA_KEY = "metadata";
     private static final CustomCacheType CACHE_TYPE = CustomCacheType.LIST;
 
     public Object process(
@@ -26,18 +27,29 @@ public class CustomCacheListManager implements ICustomCacheManager {
         CustomCacheOriginDataSupplier<?> originDataSupplier
     ) throws Throwable {
         String key = generateKey(cacheable.prefix(), keys);
-        List<?> cachedData = getCachedData(key, returnType, pageable.getOffset(), pageable.getLimit());
+        CacheSize cacheSize = CacheSize.fromSize(cacheable.cacheSize());
 
-        if (cachedData != null && !cachedData.isEmpty()) {
+        if (pageable.getOffset() >= cacheSize.getSize()) {
+            return originDataSupplier.get();
+        }
+
+        List<?> cachedData = getCachedData(key, returnType, pageable.getOffset(), pageable.getLimit());
+        CustomCache customCache = getCustomCache(key);
+
+        if (cachedData == null || cachedData.isEmpty()) {
+            return refresh(originDataSupplier, key, cacheable.ttlSeconds(), cacheSize.getSize());
+        }
+
+        if (customCache != null && !customCache.isExpired()) {
             return cachedData;
         }
 
         if (!customCacheLockProvider.lock(key)) {
-            return originDataSupplier.get();
+            return cachedData;
         }
 
         try {
-            return refresh(originDataSupplier, key);
+            return refresh(originDataSupplier, key, cacheable.ttlSeconds(), cacheSize.getSize());
         } finally {
             customCacheLockProvider.unlock(key);
         }
@@ -49,13 +61,20 @@ public class CustomCacheListManager implements ICustomCacheManager {
     }
 
 
-    private Object refresh(CustomCacheOriginDataSupplier<?> originDataSupplier, String key)
-        throws Throwable {
+    private Object refresh(
+        CustomCacheOriginDataSupplier<?> originDataSupplier,
+        String key,
+        long ttl,
+        int cacheSizeLimit
+    ) throws Throwable {
+        String data = "present";
         List<?> result = (List<?>) originDataSupplier.get();
+        CustomCacheTTL ttlObject = CustomCacheTTL.of(ttl);
+        CustomCache cache = CustomCache.of(data, ttlObject.getLogicalTTL());
 
         redisTemplate.lPushList(key, result);
-        redisTemplate.trimList(key, 0, CacheSize.CHAT_ROOM.getSize() - 1);
-
+        redisTemplate.trimList(key, 0, cacheSizeLimit - 1);
+        redisTemplate.set(metadataKey(key), cache, ttlObject.getPhysicalTTL());
         return result;
     }
 
@@ -77,5 +96,13 @@ public class CustomCacheListManager implements ICustomCacheManager {
         }
 
         return null;
+    }
+
+    private CustomCache getCustomCache(String key) {
+        return redisTemplate.get(metadataKey(key), CustomCache.class);
+    }
+
+    private String metadataKey(String key) {
+        return key + DELIMITER + METADATA_KEY;
     }
 }

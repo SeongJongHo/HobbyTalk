@@ -16,4 +16,6 @@ public @interface CustomCacheable {
     long ttlSeconds() default 10;
 
     String type() default CustomCacheType.Type.OBJECT;
+
+    int cacheSize() default 20;
 }
