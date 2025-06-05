@@ -70,7 +70,9 @@ CREATE TABLE IF NOT EXISTS open_chat_rooms (
   is_deleted int NOT NULL DEFAULT 0 COMMENT '삭제 여부',
   deleted_time timestamp NULL COMMENT '삭제 날짜',
   created_time timestamp NOT NULL DEFAULT NOW() COMMENT '생성 날짜',
-  UNIQUE (manager_id, title)
+  UNIQUE (manager_id, title),
+  INDEX idx_category_id (category_id),
+  INDEX idx_created_time_desc (created_time DESC)
 );
 
 CREATE TABLE IF NOT EXISTS open_chat_room_users (

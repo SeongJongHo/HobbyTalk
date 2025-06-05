@@ -1,5 +1,7 @@
 package com.jongho.openChat.domain.model;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.*;
 
 @Getter
@@ -17,7 +19,14 @@ public class OpenChatRoom {
     private final int currentAttendance;
     private final String password;
 
-    public OpenChatRoom(String title, String notice, Long managerId, Long categoryId, int maximumCapacity, String password) {
+    @JsonCreator
+    public OpenChatRoom(
+            @JsonProperty("title") String title,
+            @JsonProperty("notice") String notice,
+            @JsonProperty("managerId") Long managerId,
+            @JsonProperty("categoryId") Long categoryId,
+            @JsonProperty("maximumCapacity") int maximumCapacity,
+            @JsonProperty("password") String password) {
         this.title = title;
         this.notice = notice;
         this.managerId = managerId;
