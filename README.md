@@ -51,7 +51,7 @@
 
 
 ## 어플리케이션 구조도
-![HobbyTalk drawio (1)](https://github.com/f-lab-edu/HobbyTalk/assets/90754590/fd4cfcc2-7274-4d07-8d6a-51a6eb40a13f)
+![hobby drawio](https://github.com/user-attachments/assets/ac5e7352-2925-4ff1-9173-132541b8a280)
 
 
 </br>
@@ -68,7 +68,7 @@
 
 ## ERD
 
-![hobbytalk (3)](https://github.com/f-lab-edu/HobbyTalk/assets/90754590/e8ed3353-213c-4f3d-a638-ef27eb885d43)
+![hobbyErd](https://github.com/user-attachments/assets/aa45b374-23fb-420b-a6e8-60563237b4a6)
 
 
 </br>
